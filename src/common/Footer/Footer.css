@@ -1,12 +1,8 @@
 .footerDesign{
-    height: 8vh;
+    height: 5vh;
     width: 100%;
-    background:#176087;
-    color: white;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    bottom: 0;
 }
