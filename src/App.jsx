@@ -1,12 +1,12 @@
 import './App.css'
-import { Navbar } from './common/Navbar/Navbar'
+import { Header } from './common/Header/Header'
 import { Body } from './pages/Body/Body'
 import { Footer } from './common/Footer/Footer'
 
 function App() {
   return (
     <>
-      <Navbar />
+      <Header />
       <Body />
       <Footer />
     </>

@@ -1,0 +1,24 @@
+.navbarDesign{
+    height: 8vh;
+    width: 100vw;
+    background: white;
+    position: fixed;
+    top:0;
+    z-index: 999;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-link{
+    color: #6e387b !important;
+    font-weight: bold !important;
+}
+.navbar-collapse{
+    background: white;
+}
+.navbar-brand{
+    color: #FE5F55 !important;
+    font-weight: bold !important;
+}
