@@ -1,9 +1,48 @@
 .homeDesign{
-    background-color: red;
+    background-color: #6e387b;
     width: 100vw;
-    height: 100vh;
+    height: 87vh;
+    margin-top: 3.2em;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
+}
+
+.homeContainer{
+    width: 85vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.homeTitle{
+    margin-top: 2em;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.homeLogo{
+    width: 90%;
+}
+
+.homeSection{
+    margin-top: 2em;
+    width: 70%;
+    color: white;
+}
+
+@media (max-width: 500px) {
+    .homeSection{
+        margin-top: 2em;
+        width: 70%;
+        font-size: 0.8rem;
+        color: white;
+    }
 }
