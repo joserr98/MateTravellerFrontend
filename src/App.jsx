@@ -1,7 +1,7 @@
 import './App.css'
-import { Navbar } from './assets/common/Navbar/Navbar'
-import { Body } from './assets/pages/Body/Body'
-import { Footer } from './assets/common/Footer/Footer'
+import { Navbar } from './common/Navbar/Navbar'
+import { Body } from './pages/Body/Body'
+import { Footer } from './common/Footer/Footer'
 
 function App() {
   return (

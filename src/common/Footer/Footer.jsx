@@ -3,6 +3,6 @@ import './Footer.css'
 
 export const Footer = () => {
   return (
-    <div>Footer</div>
+    <div className='footerDesign'>Jose Manuel Ruiz 2023</div>
   )
 }
