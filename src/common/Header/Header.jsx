@@ -4,7 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { FaBars } from "react-icons/fa";
 import { BsTriangleFill } from "react-icons/bs"
+import { useNavigate } from "react-router-dom";
 export const Header = () => {
+  
+  const navigate = useNavigate();
   return (
     <div className="navbarDesign">
         <Navbar expand="md" className="navbarDesign">
