@@ -1,7 +1,8 @@
 .loginDesign{
     background-color: #6e387b;
+    background-image: linear-gradient(160deg, #6e387b 0%, #fe5f55 100%);
     color: white;
-    width: 100vw;
+    width: 90vw;
     height: 87vh;
     margin-top: 3.2em;
     display: flex;

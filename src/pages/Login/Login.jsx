@@ -3,12 +3,11 @@ import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import "./login.css";
-import Title from "../../assets/matetravellerlogo.png";
+import Title from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, userData } from "../userSlice";
 import { loginUser } from "../../services/apiCalls";
-import jwt_decode from "jwt-decode"
 
 export const Login = () => {
   const dispatch = useDispatch();
