@@ -13,7 +13,6 @@ export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rdxUserData = useSelector(userData);
-
   const logoutUserFunction = () => {
     dispatch(logout({ credentials: {} }));
     navigate("/");
@@ -40,12 +39,15 @@ export const Header = () => {
         <>
         <Navbar expand="md" className="navbarDesign">
           <Container>
-            <Navbar.Brand onClick={() => navigate("/")}>M<BsTriangleFill/>TETRAVELLER</Navbar.Brand>
+            <Navbar.Brand onClick={() => navigate("/")}>M<BsTriangleFill/>TETRAVELER</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav">
               <FaBars />
             </Navbar.Toggle>
             <Navbar.Collapse id="navbar-nav">
               <Nav className="me-auto">
+                <Nav.Link onClick={() => navigate("/profile")}>
+                      {rdxUserData.credentials.token.name}
+                </Nav.Link>
                 <Nav.Link className="navbarLinks" onClick={() => logoutUserFunction()}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>
