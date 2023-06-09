@@ -2,7 +2,7 @@
     background-color: #6e387b;
     background-image: linear-gradient(160deg, #6e387b 0%, #fe5f55 100%);
     color: white;
-    width: 90vw;
+    width: 100vw;
     height: 87vh;
     margin-top: 3.2em;
     display: flex;
@@ -17,22 +17,20 @@
 }
 
 .formDesignShadow{
-    margin-top: 5em;
-    border-radius: 2.4em;
-    border: 0.3em #460057 solid;
+    margin-top: 3em;
 
 }
 
 .formDesign{
     border-radius: 2em;
     padding: 1em;
-    border: 0.3em #5f0077 solid;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .bsSubmit{
+    width: 100% !important;
     background-color: #5f0077;
     border: 0.1em #460057 solid;
 }

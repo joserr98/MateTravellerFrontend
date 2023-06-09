@@ -11,6 +11,10 @@
     align-items: center;
 }
 
+.navbar-brand{
+    cursor: pointer;
+}
+
 .nav-link{
     color: #6e387b !important;
     font-weight: bold !important;

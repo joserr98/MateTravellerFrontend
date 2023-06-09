@@ -29,7 +29,6 @@ export const Login = () => {
   const loginUserFunction = () => {
     loginUser(credentials)
       .then((result) => {
-
         const data = {
           jwt: result.data.token,
           token: result.data.data,
@@ -73,9 +72,11 @@ export const Login = () => {
             />
           </Form.Group>
 
-          <Button className="bsSubmit" bsSize="small" onClick={() => loginUserFunction()}>
-            Login
-          </Button>
+          <div className="d-grid gap-1 w-100">
+            <Button className="bsSubmit" size="xs" onClick={() => loginUserFunction()}>
+              Login
+            </Button>
+          </div>
         </Form>
       </div>
     </div>
