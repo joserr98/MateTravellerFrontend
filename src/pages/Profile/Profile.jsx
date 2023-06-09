@@ -8,6 +8,7 @@ import { userData } from "../userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { dateFormat } from "../../services/functions";
+import { Button } from "react-bootstrap";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -76,6 +77,9 @@ export const Profile = () => {
         ) : (
           <></>
         )}
+            <Button className="editProfileBtn" size="md">
+              Edit your profile
+            </Button>
       </Container>
     </div>
   );
