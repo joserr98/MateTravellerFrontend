@@ -1,22 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import avatar from "../../assets/avatar.png";
-import { userData } from "../userSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { userData, login } from "../userSlice";
+import { useSelector } from "react-redux";
 import { dateFormat } from "../../services/functions";
 import { Button } from "react-bootstrap";
+import { EditProfileModal } from "../../common/EditProfileModal/EditProfileModal";
+import { editUser } from "../../services/apiCalls";
+import { useDispatch } from "react-redux";
 
 export const Profile = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const rdxUserData = useSelector(userData);
 
+  const dispatch = useDispatch();
+  const rdxUserData = useSelector(userData);
   const birthday = rdxUserData.credentials.token.birthday;
   const formattedBirthday = dateFormat(birthday);
+
+  const [showModalProfileEdit, setShowModalProfileEdit] = useState(false);
+
+  const [editedData, setEditedData] = useState({
+    id: rdxUserData.credentials.token.id,
+    name: rdxUserData.credentials.token.name,
+    lastname: rdxUserData.credentials.token.lastname,
+    email: rdxUserData.credentials.token.email,
+    country: rdxUserData.credentials.token.country,
+    birthday: rdxUserData.credentials.token.birthday,
+    password: "",
+  });
+
+  const handleOpenModalEdit = (user) => {
+    setShowModalProfileEdit(true);
+  };
+
+  const [showToast, setShowToast] = useState(false);
+
+  const inputHandlerFunction = (e) => {
+    setEditedData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleCloseModalEdit = () => {
+    setShowModalProfileEdit(false);
+  };
+
+  const editProfileFunction = () => {
+    if (!editedData.password) {
+      setShowToast(true);
+    }
+    editUser(rdxUserData.credentials, editedData)
+      .then(() => {
+        const data = {
+          jwt: rdxUserData.credentials.jwt,
+          token: editedData,
+        };
+        dispatch(login({ credentials: data }));
+        setShowModalProfileEdit(false);
+        // getUsers(rdxUserData.credentials)
+        //   .then((results) => {
+        //     setUsers(results.data);
+        //   })
+        //   .catch((err) => console.error(err));
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="profileDesign">
@@ -29,7 +80,7 @@ export const Profile = () => {
           <Col md={3}></Col>
         </Row>
         <Row>
-        <Col md={4}></Col>
+          <Col md={4}></Col>
           <Col className="profileColumn mb-3 flexEnd" md={2}>
             <a>Name</a>
           </Col>
@@ -40,7 +91,7 @@ export const Profile = () => {
           <Col md={2}></Col>
         </Row>
         <Row>
-            <Col md={4}></Col>
+          <Col md={4}></Col>
           <Col className="profileColumn mb-3 flexEnd" md={2}>
             <a>Email</a>
           </Col>
@@ -77,10 +128,23 @@ export const Profile = () => {
         ) : (
           <></>
         )}
-            <Button className="editProfileBtn" size="md">
-              Edit your profile
-            </Button>
+        <Button
+          className="editProfileBtn"
+          size="md"
+          onClick={() => handleOpenModalEdit(rdxUserData.credentials.token)}
+        >
+          Edit your profile
+        </Button>
       </Container>
+
+      <EditProfileModal
+        showModalProfileEdit={showModalProfileEdit}
+        handleCloseModalEdit={handleCloseModalEdit}
+        inputHandlerFunction={inputHandlerFunction}
+        editProfileFunction={editProfileFunction}
+        setShowToast={setShowToast}
+        showToast={showToast}
+      />
     </div>
   );
 };

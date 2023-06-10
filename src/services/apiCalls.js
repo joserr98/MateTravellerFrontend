@@ -9,3 +9,13 @@ export const loginUser = async (credentials) => {
 export const registerUser = async (credentials) => {
     return await axios.post(`${url}/users`, credentials);
 };
+
+export const editUser = async (credentials, body) => {
+    const config = {
+        headers: {
+          Authorization: "Bearer " + credentials.jwt,
+        }
+      }
+
+    return await axios.patch(`${url}/users/${credentials.token.id}`, body, config);
+};
