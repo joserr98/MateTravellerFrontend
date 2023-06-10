@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "./EditProfileModal.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import Toast from "react-bootstrap/Toast";
 import { userData } from "../../pages/userSlice";

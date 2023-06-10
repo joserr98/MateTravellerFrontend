@@ -19,3 +19,13 @@ export const editUser = async (credentials, body) => {
 
     return await axios.patch(`${url}/users/${credentials.token.id}`, body, config);
 };
+
+export const deleteUser = async (credentials) => {
+    const config = {
+        headers: {
+          Authorization: "Bearer " + credentials.jwt,
+        }
+      }
+
+    return await axios.delete(`${url}/users/${credentials.token.id}`, config);
+};

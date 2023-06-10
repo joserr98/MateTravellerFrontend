@@ -4,22 +4,24 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import avatar from "../../assets/avatar.png";
-import { userData, login } from "../userSlice";
+import { userData, login, logout } from "../userSlice";
 import { useSelector } from "react-redux";
 import { dateFormat } from "../../services/functions";
 import { Button } from "react-bootstrap";
 import { EditProfileModal } from "../../common/EditProfileModal/EditProfileModal";
-import { editUser } from "../../services/apiCalls";
+import { editUser, deleteUser } from "../../services/apiCalls";
 import { useDispatch } from "react-redux";
+import { ConfirmationModal } from "../../common/ConfirmationModal/ConfirmationModal";
+import { useNavigate } from "react-router-dom";
 
 export const Profile = () => {
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const rdxUserData = useSelector(userData);
-  const birthday = rdxUserData.credentials.token.birthday;
-  const formattedBirthday = dateFormat(birthday);
 
   const [showModalProfileEdit, setShowModalProfileEdit] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const [editedData, setEditedData] = useState({
     id: rdxUserData.credentials.token.id,
@@ -30,6 +32,10 @@ export const Profile = () => {
     birthday: rdxUserData.credentials.token.birthday,
     password: "",
   });
+
+  const handleCloseConfirmationModal = () => {
+    setShowConfirmationModal(false);
+  };
 
   const handleOpenModalEdit = (user) => {
     setShowModalProfileEdit(true);
@@ -60,11 +66,16 @@ export const Profile = () => {
         };
         dispatch(login({ credentials: data }));
         setShowModalProfileEdit(false);
-        // getUsers(rdxUserData.credentials)
-        //   .then((results) => {
-        //     setUsers(results.data);
-        //   })
-        //   .catch((err) => console.error(err));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const deleteUserFunction = () => {
+    deleteUser(rdxUserData.credentials)
+      .then(() => {
+        handleCloseConfirmationModal();
+        dispatch(logout({ credentials: {} }));
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
@@ -100,14 +111,14 @@ export const Profile = () => {
           </Col>
           <Col md={2}></Col>
         </Row>
-        {rdxUserData.credentials.token.birthday != null ? (
+        {rdxUserData.credentials.token?.birthday ? (
           <Row>
             <Col md={4}></Col>
             <Col className="profileColumn mb-3 flexEnd" md={2}>
               <a>Birthday</a>
             </Col>
             <Col className="profileColumn mb-3" md={4}>
-              {formattedBirthday}
+              {dateFormat(rdxUserData.credentials.token.birthday)}
             </Col>
             <Col md={2}></Col>
           </Row>
@@ -128,13 +139,22 @@ export const Profile = () => {
         ) : (
           <></>
         )}
-        <Button
-          className="editProfileBtn"
-          size="md"
-          onClick={() => handleOpenModalEdit(rdxUserData.credentials.token)}
-        >
-          Edit your profile
-        </Button>
+        <div className="profileButtons">
+          <Button
+            className="editProfileBtn"
+            size="md"
+            onClick={() => handleOpenModalEdit(rdxUserData.credentials.token)}
+          >
+            Edit profile
+          </Button>
+          <Button
+            className="deleteProfileBtn"
+            size="md"
+            onClick={() => setShowConfirmationModal(true)}
+          >
+            Erase account
+          </Button>
+        </div>
       </Container>
 
       <EditProfileModal
@@ -144,6 +164,13 @@ export const Profile = () => {
         editProfileFunction={editProfileFunction}
         setShowToast={setShowToast}
         showToast={showToast}
+      />
+
+      <ConfirmationModal
+      showConfirmationModal={showConfirmationModal}
+      handleCloseConfirmationModal={handleCloseConfirmationModal}
+      deleteUserFunction={deleteUserFunction}
+      name={"profile"}
       />
     </div>
   );
