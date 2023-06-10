@@ -29,6 +29,7 @@ export const Header = () => {
             </Navbar.Toggle>
             <Navbar.Collapse id="navbar-nav">
               <Nav className="me-auto">
+                <Nav.Link className="navbarLinks" onClick={() => navigate("/trips")}>Trips</Nav.Link>
                 <Nav.Link className="navbarLinks" onClick={() => navigate("/login")}>Login</Nav.Link>
                 <Nav.Link className="navbarLinks" onClick={() => navigate("/register")}>Register</Nav.Link>
               </Nav>
@@ -48,6 +49,7 @@ export const Header = () => {
                 <Nav.Link onClick={() => navigate("/profile")}>
                       {rdxUserData.credentials.token.name}
                 </Nav.Link>
+                <Nav.Link className="navbarLinks" onClick={() => navigate("/trips")}>Trips</Nav.Link>
                 <Nav.Link className="navbarLinks" onClick={() => logoutUserFunction()}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>
