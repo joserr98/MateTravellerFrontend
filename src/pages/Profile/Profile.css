@@ -1,5 +1,7 @@
 .profileDesign{
-    background-color: #6e387b;
+    /* background-color: #6e387b;
+    background-color: #fe5f55; */
+    background-color: #587B7F; 
     /* background-image: linear-gradient(160deg, #6e387b 0%, #fe5f55 100%); */
     width: 100vw;
     height: 100%;
@@ -11,14 +13,14 @@
 
 .profileContainer{
     color: black;
-    margin-top: 2em;
+    margin-top: 3em;
     margin-bottom: 0.5em;
     height: 90%;
     font-size: 1.5em;
     width: 70%;
     border-radius: 15px;
-    border: 4px solid #8a7100;
-    background-color: #FFCF00;
+    border: 5px solid #49676a;
+    background-color: #E1DEE3;
 }
 
 .flexEnd{
@@ -56,14 +58,14 @@
 .editProfileBtn{
     width: 50%;
     margin-top: 0.5em;
-    background-color: #5f0077;
-    border: 0.1em #460057 solid;
+    background-color: #06D6A0;
+    border: 0.1em #05bc8b solid;
     margin-bottom: 0.5em;
 }
 
 .editProfileBtn:hover{
-    background-color: #460057;
-    border: 0.1em #460057 solid;
+    background-color: #05bc8b;
+    border: 0.1em #05bc8b solid;
 }
 
 .deleteProfileBtn{
