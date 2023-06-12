@@ -10,6 +10,9 @@ import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 export const Trips = () => {
 
   const userDataRdx = useSelector(userData);
+
+  const userCredentials = Object.keys(userDataRdx.credentials).length
+
   const [trips, setTrips] = useState([]);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState("");
@@ -55,7 +58,7 @@ export const Trips = () => {
                   <div className="endDate">TO: {trip.end_date}</div>
                 </div>
                 <div className="tripsDescription" title={trip.description}>{truncate(trip.description, 100)}</div>
-                {userDataRdx.credentials ? (
+                {userCredentials != 0 ? (
                 <div className="tripsButton"><Button className="joinTripButton" onClick={() => {trip.id}}>Join Trip</Button></div>
                 ) : (<></>)}
                 </div>
@@ -76,6 +79,9 @@ export const Trips = () => {
                 ) : (
                   <></>
                 )}
+                  <Button className="paginationButton activePage">
+                    {page}
+                  </Button>
                 {page != pages ? (
                 <Button className="paginationButton" onClick={() => setPageFunction(page + 1)}>Next</Button>
                 ) : (
