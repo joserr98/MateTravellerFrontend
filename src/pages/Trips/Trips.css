@@ -1,9 +1,10 @@
 .tripsDeisgn{
     background-color: #6e387b;
+    background-color: #4C1E4F;
     background-image: linear-gradient(160deg, #6e387b 0%, #fe5f55 100%);
     color: white;
     width: 100vw;
-    height: 87vh;
+    min-height: 87vh;
     margin-top: 3.2em;
     display: flex;
     flex-direction: column;
@@ -11,16 +12,16 @@
 }
 
 .tripsContainer{
-    margin-top: 2.2em;
+    margin-top: 2em;
     width: 80%;
     height: 90%;
+    border-radius: 2em;
 }
 
 .trips{
-    height: 90%;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 32.3% 32.3% 32.3%;
     grid-gap: 1em;
 }
 
@@ -30,12 +31,34 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    padding: 1em;
+}
+
+.paginationButton{
+    color: black;
+    background-color: #FFCF00;
+    border: 3px solid #ff9d00;
+}
+
+.paginationButton:hover{
+    background-color: #ff9d00;
+    border: 3px solid #ff9d00;
 }
 
 .trip{
     width: 100%;
     height: 100%;
-    border: 1px solid black;
+    padding: 0.2em;
+    background-color: #00916E;
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+.trip:hover{
+    background-color: #C08497;
+    width: 100%;
+    height: 100%;
+    padding: 0.2em;
 }
 
 .tripsCity{
@@ -44,28 +67,74 @@
     display: flex;
     justify-content:space-around;
     flex-direction: row;
+    background-color: #00654d;
+    border-radius: 1em 1em 0 0;
 }
 
 .tripsDates{
+    padding: 0.2em 0 0.2em 0;
     height: 15%;
     max-height: 15%;
+    color: #201335;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     flex-direction: row;
 }
 
 .tripsDescription{
-    height: 55%;
-    max-height: 55%;
+    height: 40%;
+    color: #201335;
+    max-height: 40%;
+    padding-top: 1em;
     display: flex;
     justify-content:space-around;
     flex-direction: row;
 }
 
 .tripsButton{
-    height: 15%;
-    max-height: 55%;
+    margin-top: 0.5em;
+    height: 20%;
+    max-height: 20%;
     display: flex;
-    justify-content:space-around;
+    justify-content:center;
+    align-items: center;
     flex-direction: row;
 }
+
+.joinTripButton{
+    height: 100%;
+    color: #E7EB90;
+    background-color: #6F5060;
+    border: 2px solid #51344D;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+.joinTripButton:hover{
+    height: 100%;
+    color: #E7EB90;
+    background-color: #51344D;
+    border: 2px solid #51344D;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+
+@media (max-width: 750px) {
+    .trips{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 48% 48%;
+        grid-gap: 1em;
+    }
+} 
+
+@media (max-width: 450px) {
+    .trips{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+    }
+} 

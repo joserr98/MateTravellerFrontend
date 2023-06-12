@@ -9,3 +9,17 @@ export const dateFormat = (date) => {
 
   return outputDate;
 };
+
+export const truncate = (str, maxLength) => {
+  if (str.length <= maxLength) {
+    return str;
+  } else {
+    const lastSpaceIndex = str.lastIndexOf(" ", maxLength);
+    
+    if (lastSpaceIndex !== -1) {
+      return str.substring(0, lastSpaceIndex) + "...";
+    } else {
+      return str.substring(0, maxLength) + "...";
+    }
+  }
+};

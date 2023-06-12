@@ -7,13 +7,14 @@ import { Profile } from '../Profile/Profile'
 import { Trips } from '../Trips/Trips'
 
 export const Body = () => {
+
   return (
     <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/profile" element={<Profile/>} />
-        <Route path="/trips" element={<Trips/>} />
+        <Route path="/trips" element={<Trips />} />
     </Routes>
   )
 }
