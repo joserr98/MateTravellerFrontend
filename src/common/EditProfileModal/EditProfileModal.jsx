@@ -13,7 +13,7 @@ export const EditProfileModal = ({
     setShowToast,
   }) => {
   
-  const userDataRdx = useSelector(userData);
+  const rdxUserData = useSelector(userData);
 
   return (
     <Modal show={showModalProfileEdit} onHide={handleCloseModalEdit}>
@@ -26,7 +26,7 @@ export const EditProfileModal = ({
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
-              placeholder={userDataRdx.credentials.token.name}
+              placeholder={rdxUserData.credentials.token.name}
               name={"name"}
               onChange={(e) => inputHandlerFunction(e)}
               autoFocus
@@ -37,7 +37,7 @@ export const EditProfileModal = ({
             <Form.Label>Lastname</Form.Label>
             <Form.Control
               type="text"
-              placeholder={userDataRdx.credentials.token.lastname}
+              placeholder={rdxUserData.credentials.token.lastname}
               name={"lastname"}
               onChange={(e) => inputHandlerFunction(e)}
             />
@@ -47,7 +47,7 @@ export const EditProfileModal = ({
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
-              placeholder={userDataRdx.credentials.token.email}
+              placeholder={rdxUserData.credentials.token.email}
               name={"email"}
               onChange={(e) => inputHandlerFunction(e)}
             />
@@ -66,7 +66,7 @@ export const EditProfileModal = ({
             <Form.Label>Country</Form.Label>
             <Form.Control
               type="text"
-              placeholder={userDataRdx.credentials.token.country}
+              placeholder={rdxUserData.credentials.token.country}
               name={"country"}
               onChange={(e) => inputHandlerFunction(e)}
             />
@@ -76,7 +76,7 @@ export const EditProfileModal = ({
             <Form.Label>Birthday</Form.Label>
             <Form.Control
               type="date"
-              placeholder={userDataRdx.credentials.token.birthday}
+              placeholder={rdxUserData.credentials.token.birthday}
               name={"birthday"}
               onChange={(e) => inputHandlerFunction(e)}
             />

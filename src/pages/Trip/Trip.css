@@ -140,3 +140,16 @@
     width: 100%;
     border: 0.2em solid #00654d;
 }
+
+@media (max-width: 600px) {
+    .tripCardInfo{
+        flex-direction: column;
+    }
+    .tripDetails{
+        width: 100%;
+    }
+    .tripParticipants{
+        width: 100%;
+    }
+  }
+

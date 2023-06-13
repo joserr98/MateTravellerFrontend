@@ -39,3 +39,8 @@ export const getAllTrips = async () => {
 export const getPaginateTrips = async (page) => {
     return await axios.get(`${url}/trips/pages?page=${page}`);
 };
+
+export const getUsersFromTrip = async (trip) => {
+    return await axios.get(`${url}/users/trips/${trip}`);
+};
+

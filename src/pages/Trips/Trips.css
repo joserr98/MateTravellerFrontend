@@ -107,7 +107,7 @@
     flex-direction: row;
 }
 
-.joinTripButton{
+.showTripButton{
     height: 100%;
     color: #E7EB90;
     background-color: #6F5060;
@@ -117,7 +117,7 @@
     justify-content:center;
 }
 
-.joinTripButton:hover{
+.showTripButton:hover{
     height: 100%;
     color: #E7EB90;
     background-color: #51344D;
