@@ -40,7 +40,13 @@ export const getPaginateTrips = async (page) => {
     return await axios.get(`${url}/trips/pages?page=${page}`);
 };
 
-export const getUsersFromTrip = async (trip) => {
-    return await axios.get(`${url}/users/trips/${trip}`);
+export const getTravelersFromTrip = async (trip) => {
+    return await axios.get(`${url}/users/travelers/trips/${trip.data.id}`);
 };
+
+export const getOrganizerFromTrip = async (trip) => {
+    return await axios.get(`${url}/users/organizer/trips/${trip.data.id}`);
+};
+
+
 

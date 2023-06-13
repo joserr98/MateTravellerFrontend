@@ -10,6 +10,12 @@ export const dateFormat = (date) => {
   return outputDate;
 };
 
+export const dateFormatMonth = (date) => {
+    const options = { day: '2-digit', month: 'short', year: 'numeric'  };
+    const outputDate = new Date(date);
+    return outputDate.toLocaleString('en-US', options);
+}
+
 export const truncate = (str, maxLength) => {
   if (str.length <= maxLength) {
     return str;
@@ -22,4 +28,16 @@ export const truncate = (str, maxLength) => {
       return str.substring(0, maxLength) + "...";
     }
   }
-};
+}; 
+
+export const getAge = (birthDate) => {
+  const today = new Date();
+  let [year, month, day] = birthDate.split('-');
+  let birthDateObj = new Date(year, month - 1, day);
+  let age = today.getFullYear() - birthDateObj.getFullYear();
+  let m = today.getMonth() - birthDateObj.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDateObj.getDate())) {
+    age--;
+  }
+  return age;
+}
