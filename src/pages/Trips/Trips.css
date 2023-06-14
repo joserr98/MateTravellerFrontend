@@ -115,6 +115,11 @@
     color: #fe5f55;
 }
 
+.deleteTrips:hover{
+    margin-left: -1em;
+    color: white
+}
+
 .tripsDates{
     padding: 0.2em 0 0.2em 0;
     height: 15%;

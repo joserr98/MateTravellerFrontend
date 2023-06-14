@@ -137,7 +137,9 @@ export const Trips = () => {
               <div className="trip" key={trip.id}>
                 <div className="tripsTitle">
                   <div className="tripsCity">{trip.city.toUpperCase()}</div>
-                  {rdxUserData.credentials.token.role_id == 3 ? (
+                  {!rdxUserData.credentials || !rdxUserData.credentials.token || rdxUserData.credentials.token.role_id === 1 ? (
+                    <></>
+                  ) : (
                     <div
                       className="deleteTrips"
                       onClick={() => {
@@ -147,8 +149,6 @@ export const Trips = () => {
                     >
                       <a>x</a>
                     </div>
-                  ) : (
-                    <></>
                   )}
                 </div>
                 <div className="tripsDates">
@@ -175,8 +175,8 @@ export const Trips = () => {
           </div>
           <div className="options">
             <div className="addTripButton">
-              {rdxUserData.credentials.token.role_id == 2 ||
-              rdxUserData.credentials.token.role_id == 3 ? (
+              {rdxUserData?.credentials?.token?.role_id == 2 ||
+              rdxUserData?.credentials?.token?.role_id == 3 ? (
                 <Button
                   className="newTripButton"
                   onClick={() => handleOpenModalNewTrip()}
