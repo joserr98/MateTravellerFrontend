@@ -51,10 +51,10 @@ export const getOrganizerFromTrip = async (trip) => {
 export const joinTrip = async (tripId, credentials) => {
     const config = {
         headers: {
-          Authorization: "Bearer 9|9qIhAJGa9paZ4FOcAVVvE58fCgyUfAEmzPDPGKUv",
+          Authorization: "Bearer " + credentials.jwt,
         }
       }
-
+      
     return await axios.post(`${url}/trips/${tripId}`, config);
 };
 
