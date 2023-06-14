@@ -5,7 +5,9 @@ export const NewTripModal = ({
     showModalNewTrip,
     handleCloseModalNewTrip,
     inputHandlerFunction,
-    newTripFunction
+    newTripFunction,
+    today,
+    startDate
   }) => {
   
 
@@ -33,6 +35,7 @@ export const NewTripModal = ({
               type="date"
               placeholder={""}
               name={"start_date"}
+              min={today}
               onChange={(e) => inputHandlerFunction(e)}
             />
           </Form.Group>
@@ -43,6 +46,7 @@ export const NewTripModal = ({
               type="date"
               placeholder={""}
               name={"end_date"}
+              min={startDate}
               onChange={(e) => inputHandlerFunction(e)}
             />
           </Form.Group>
@@ -54,7 +58,7 @@ export const NewTripModal = ({
               name={"description"}
               placeholder={"description"}
               onChange={(e) => inputHandlerFunction(e)}
-              as="textarea" rows={3}
+              as="textarea" rows={3} 
             />
           </Form.Group>
         </Form>
@@ -64,7 +68,7 @@ export const NewTripModal = ({
           Close
         </Button>
         <Button variant="primary" onClick={() => newTripFunction()}>
-          Save Changes
+          New Trip
         </Button>
       </Modal.Footer>
     </Modal>

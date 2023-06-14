@@ -35,7 +35,7 @@ export const Trip = () => {
   }, []);
 
   const joinTripFunction = (tripId) => {
-    joinTrip(tripId, rdxUserData.credentials)
+    joinTrip(rdxUserData.credentials, tripId)
     .then(() => {
       getTravelersFromTrip(rdxTripData)
       .then((results) => {

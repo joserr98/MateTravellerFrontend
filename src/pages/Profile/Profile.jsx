@@ -67,7 +67,7 @@ export const Profile = () => {
         dispatch(login({ credentials: data }));
         setShowModalProfileEdit(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
 
   const deleteUserFunction = () => {
@@ -77,7 +77,7 @@ export const Profile = () => {
         dispatch(logout({ credentials: {} }));
         navigate("/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
 
   return (

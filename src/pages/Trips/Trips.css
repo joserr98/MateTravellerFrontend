@@ -23,6 +23,7 @@
     display: grid;
     grid-template-columns: 32.3% 32.3% 32.3%;
     grid-gap: 1em;
+    min-height: 48em;
 }
 
 .options{
