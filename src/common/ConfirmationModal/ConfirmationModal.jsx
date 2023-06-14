@@ -5,7 +5,9 @@ export const ConfirmationModal = ({
   showConfirmationModal,
   handleCloseConfirmationModal,
   deleteUserFunction,
-  name
+  deleteTripFunction,
+  name,
+  tripId
 }) => {
   return (
     <Modal show={showConfirmationModal} onHide={handleCloseConfirmationModal}>
@@ -17,12 +19,26 @@ export const ConfirmationModal = ({
         <p>There is no comeback</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={() => handleCloseConfirmationModal()}>
+        <Button
+          variant="secondary"
+          onClick={() => handleCloseConfirmationModal()}
+        >
           Cancel
         </Button>
-        <Button variant="danger" onClick={() => deleteUserFunction()}>
-          Delete
-        </Button>
+        {deleteUserFunction ? (
+          <Button variant="danger" onClick={() => deleteUserFunction()}>
+            Delete
+          </Button>
+        ) : (
+          <></>
+        )}
+        {deleteTripFunction ? (
+          <Button variant="danger" onClick={() => deleteTripFunction(tripId)}>
+            Delete
+          </Button>
+        ) : (
+          <></>
+        )}
       </Modal.Footer>
     </Modal>
   );

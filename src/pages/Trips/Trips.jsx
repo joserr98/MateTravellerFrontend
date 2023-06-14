@@ -2,14 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./Trips.css";
 import { userData } from "../userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTrips, getPaginateTrips, newTrip } from "../../services/apiCalls";
+import {
+  getAllTrips,
+  getPaginateTrips,
+  newTrip,
+  deleteTrip
+} from "../../services/apiCalls";
 import Button from "react-bootstrap/Button";
 import { useCapitals, truncate } from "../../services/functions";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import { useNavigate } from "react-router-dom";
 import { detail } from "../detailSlice";
-import {NewTripModal} from "../../common/NewTripModal/NewTripModal";
+import { NewTripModal } from "../../common/NewTripModal/NewTripModal";
+import { ConfirmationModal } from "../../common/ConfirmationModal/ConfirmationModal";
 
 export const Trips = () => {
   const navigate = useNavigate();
@@ -21,25 +27,28 @@ export const Trips = () => {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState("");
   const [showModalNewTrip, setShowModalNewTrip] = useState(false);
-  const [newTripInfo, setNewTripInfo] = useState({
-    city: '',
-    start_date: '',
-    end_date: '',
-    description: ''
-  })
-  const [startDate, setStartDate] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [tripId, setTripId] = useState("");
 
+  const [newTripInfo, setNewTripInfo] = useState({
+    city: "",
+    start_date: "",
+    end_date: "",
+    description: "",
+  });
+
+  const [startDate, setStartDate] = useState("");
   const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
     getAllTrips()
       .then((results) => {
         const currentPages = results.data.data.length;
-        const totalPages = Math.ceil(currentPages / 9); // Use Math.ceil to round up to the nearest integer
+        const totalPages = Math.ceil(currentPages / 9);
         setPages(totalPages);
       })
       .catch((err) => console.error(err));
-  
+
     getPaginateTrips(page)
       .then((results) => {
         setTrips(results.data.data.data);
@@ -61,7 +70,7 @@ export const Trips = () => {
     navigate(`/trip`);
   };
 
-  const handleOpenModalNewTrip = (user) => {
+  const handleOpenModalNewTrip = () => {
     setShowModalNewTrip(true);
   };
 
@@ -69,21 +78,44 @@ export const Trips = () => {
     setShowModalNewTrip(false);
   };
 
-  const newTripFunction = () => {
+  const handleCloseConfirmationModal = () => {
+    setShowConfirmationModal(false);
+  };
 
-    if (newTripInfo.start_date >= newTripInfo.end_date){
-      alert('End Date cannot be lower than Start Date')
+  const newTripFunction = () => {
+    if (newTripInfo.start_date >= newTripInfo.end_date) {
+      alert("End Date cannot be lower than Start Date");
       return;
     }
 
-    newTripInfo.city = useCapitals(newTripInfo.city, "first")
-    newTripInfo.description = useCapitals(newTripInfo.description, "all")
+    newTripInfo.city = useCapitals(newTripInfo.city, "first");
+    newTripInfo.description = useCapitals(newTripInfo.description, "all");
 
-    newTrip(rdxUserData.credentials,newTripInfo)
+    newTrip(rdxUserData.credentials, newTripInfo)
+      .then(() => {
+        handleCloseModalNewTrip();
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const deleteTripFunction = (tripId) => {
+    deleteTrip(rdxUserData.credentials, tripId)
     .then(() => {
-      handleCloseModalNewTrip()
+      setShowConfirmationModal(false);
+      getAllTrips()
+      .then((results) => {
+        const currentPages = results.data.data.length;
+        const totalPages = Math.ceil(currentPages / 9);
+        setPages(totalPages);
+      })
+      .catch((err) => console.error(err));
+      getPaginateTrips(page)
+      .then((results) => {
+        setTrips(results.data.data.data);
+      })
+      .catch((err) => console.error(err));
     })
-    .catch((err) => console.error(err))
+    .catch((err) => console.error(err));
   }
 
   const inputHandlerFunction = (e) => {
@@ -103,7 +135,10 @@ export const Trips = () => {
           <div className="trips">
             {trips.map((trip) => (
               <div className="trip" key={trip.id}>
-                <div className="tripsCity">{trip.city.toUpperCase()}</div>
+                <div className="tripsTitle">
+                  <div className="tripsCity">{trip.city.toUpperCase()}</div>
+                  <div className="deleteTrips" onClick={() => {setShowConfirmationModal(true);setTripId(trip.id)}}><a>x</a></div>
+                </div>
                 <div className="tripsDates">
                   <div className="startDate">FROM: {trip.start_date}</div>
                   <div className="endDate">TO: {trip.end_date}</div>
@@ -128,15 +163,17 @@ export const Trips = () => {
           </div>
           <div className="options">
             <div className="addTripButton">
-                  {rdxUserData.credentials.token.role_id == 2 || 
-                  rdxUserData.credentials.token.role_id == 3 ? (
-              <Button
-                className="newTripButton"
-                onClick={() => handleOpenModalNewTrip()}
-              >
-                New Trip
-              </Button>
-      ) : (<></>)}
+              {rdxUserData.credentials.token.role_id == 2 ||
+              rdxUserData.credentials.token.role_id == 3 ? (
+                <Button
+                  className="newTripButton"
+                  onClick={() => handleOpenModalNewTrip()}
+                >
+                  New Trip
+                </Button>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="pagination">
               <ButtonToolbar aria-label="Toolbar with button groups">
@@ -202,6 +239,13 @@ export const Trips = () => {
         startDate={startDate}
       />
 
+      <ConfirmationModal
+      showConfirmationModal={showConfirmationModal}
+      handleCloseConfirmationModal={handleCloseConfirmationModal}
+      deleteTripFunction={deleteTripFunction}
+      name={"trip"}
+      tripId={tripId}
+      />
     </div>
   );
 };

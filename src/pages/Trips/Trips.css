@@ -79,7 +79,6 @@
     padding: 0.2em;
     background-color: #00916E;
     border-radius: 1em;
-    cursor: pointer;
 }
 
 .trip:hover{
@@ -89,14 +88,31 @@
     padding: 0.2em;
 }
 
+.tripsTitle{
+    display: flex;
+    background-color: #00654d;
+    border-radius: 1em 1em 0 0;
+}
+
+.tripsTitle:hover{
+    display: flex;
+    background-color: #6F5060;
+    border-radius: 1em 1em 0 0;
+}
+
 .tripsCity{
+    width: 100%;
     height: 15%;
     max-height: 15%;
     display: flex;
     justify-content:space-around;
     flex-direction: row;
-    background-color: #00654d;
-    border-radius: 1em 1em 0 0;
+}
+
+.deleteTrips{
+    margin-left: -1em;
+    cursor: pointer;
+    color: #fe5f55;
 }
 
 .tripsDates{

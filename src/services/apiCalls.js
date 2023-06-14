@@ -71,3 +71,13 @@ export const newTrip = async (credentials, body) => {
 
   return await axios.post(`${url}/trips`, body, config);
 };
+
+export const deleteTrip = async (credentials, tripId) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + credentials.jwt,
+    },
+  };
+
+  return await axios.delete(`${url}/trips/${tripId}`, config);
+};
