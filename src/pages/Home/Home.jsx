@@ -1,6 +1,6 @@
 import React from 'react'
 import './Home.css'
-import Title from '../../assets/logo.png'
+import Title from '../../assets/finallogo.png'
 
 export const Home = () => {
   return (

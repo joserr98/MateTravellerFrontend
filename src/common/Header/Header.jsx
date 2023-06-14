@@ -23,7 +23,7 @@ export const Header = () => {
       {!rdxUserData?.credentials?.token ? (
         <Navbar expand="md" className="navbarDesign">
           <Container>
-            <Navbar.Brand onClick={() => navigate("/")}>M<BsTriangleFill/>TETRAVELLER</Navbar.Brand>
+            <Navbar.Brand onClick={() => navigate("/")}>M<BsTriangleFill/>TETRAVELER</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav">
               <FaBars />
             </Navbar.Toggle>

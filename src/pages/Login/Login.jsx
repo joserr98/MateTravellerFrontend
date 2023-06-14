@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import "./login.css";
-import Title from "../../assets/logo.png";
+import Title from "../../assets/finallogo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, userData } from "../userSlice";

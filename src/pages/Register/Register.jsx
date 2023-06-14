@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./register.css";
-import Title from "../../assets/logo.png";
+import Title from "../../assets/finallogo.png";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { registerUser } from "../../services/apiCalls";
@@ -34,7 +34,7 @@ export const Register = () => {
   return (
     <div className="registerDesign">
       <div className="loginTitle mb-4">
-        <img className="homeLogo " src={Title} alt="" />
+        <img className="homeLogo"  src={Title} alt="SVG Image" />
       </div>
       <Form>
       <Form.Group className="mb-3">
