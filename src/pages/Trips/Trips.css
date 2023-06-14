@@ -25,13 +25,34 @@
     grid-gap: 1em;
 }
 
-.pagination{
+.options{
     height: 10%;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
     padding: 1em;
+}
+
+.newTripButton{
+    color: black;
+    background-color: #FFCF00;
+    border: 3px solid #ff9d00;
+}
+
+.newTripButton:hover{
+    background-color: #ff9d00;
+    border: 3px solid #ff9d00;
+}
+
+.pagination{
+    width: 50%;
+    display: flex;
+    justify-content: end;
+}
+
+.addTripButton{
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .paginationButton{
@@ -63,7 +84,7 @@
 .trip:hover{
     background-color: #C08497;
     width: 100%;
-    height: 100%;
+    height: 15em;
     padding: 0.2em;
 }
 

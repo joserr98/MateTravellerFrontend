@@ -9,8 +9,10 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import { useNavigate } from "react-router-dom";
 import { detail } from "../detailSlice";
+import {NewTripModal} from "../../common/NewTripModal/NewTripModal";
 
 export const Trips = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rdxUserData = useSelector(userData);
@@ -19,6 +21,13 @@ export const Trips = () => {
   const [trips, setTrips] = useState([]);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState("");
+  const [showModalNewTrip, setShowModalNewTrip] = useState(false);
+  const [newTripInfo, setNewTripInfo] = useState({
+    city: '',
+    start_date: '',
+    end_date: '',
+    description: ''
+  })
 
   useEffect(() => {
     getAllTrips()
@@ -53,6 +62,25 @@ export const Trips = () => {
     navigate(`/trip`);
   };
 
+  const handleOpenModalNewTrip = (user) => {
+    setShowModalNewTrip(true);
+  };
+
+  const handleCloseModalNewTrip = () => {
+    setShowModalNewTrip(false);
+  };
+
+  const newTripFunction = () => {
+
+  }
+
+  const inputHandlerFunction = (e) => {
+    setNewTripInfo((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <div className="tripsDeisgn">
       {trips.length !== 0 ? (
@@ -83,57 +111,80 @@ export const Trips = () => {
               </div>
             ))}
           </div>
-          <div className="pagination">
-            <ButtonToolbar aria-label="Toolbar with button groups">
-              <ButtonGroup className="me-2">
-                {page != 1 ? (
-                  <Button
-                    className="paginationButton"
-                    onClick={() => setPageFunction(1)}
-                  >
-                    1
+          <div className="options">
+            <div className="addTripButton">
+                  {rdxUserData.credentials.token.role_id == 2 || 
+                  rdxUserData.credentials.token.role_id == 3 ? (
+              <Button
+                className="newTripButton"
+                onClick={() => handleOpenModalNewTrip()}
+              >
+                New Trip
+              </Button>
+      ) : (<></>)}
+            </div>
+            <div className="pagination">
+              <ButtonToolbar aria-label="Toolbar with button groups">
+                <ButtonGroup className="me-2">
+                  {page != 1 ? (
+                    <Button
+                      className="paginationButton"
+                      onClick={() => setPageFunction(1)}
+                    >
+                      1
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
+                  {page !== 1 && page !== 2 ? (
+                    <Button
+                      className="paginationButton"
+                      onClick={() => setPageFunction(page - 1)}
+                    >
+                      Previous
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
+                  <Button className="paginationButton activePage">
+                    {page}
                   </Button>
-                ) : (
-                  <></>
-                )}
-                {page != 1 ? (
-                  <Button
-                    className="paginationButton"
-                    onClick={() => setPageFunction(page - 1)}
-                  >
-                    Previous
-                  </Button>
-                ) : (
-                  <></>
-                )}
-                <Button className="paginationButton activePage">{page}</Button>
-                {page != pages ? (
-                  <Button
-                    className="paginationButton"
-                    onClick={() => setPageFunction(page + 1)}
-                  >
-                    Next
-                  </Button>
-                ) : (
-                  <></>
-                )}
-                {page != pages ? (
-                  <Button
-                    className="paginationButton"
-                    onClick={() => setPageFunction(pages)}
-                  >
-                    {pages}
-                  </Button>
-                ) : (
-                  <></>
-                )}
-              </ButtonGroup>
-            </ButtonToolbar>
+                  {page !== pages && page !== pages - 1 ? (
+                    <Button
+                      className="paginationButton"
+                      onClick={() => setPageFunction(page + 1)}
+                    >
+                      Next
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
+                  {page != pages ? (
+                    <Button
+                      className="paginationButton"
+                      onClick={() => setPageFunction(pages)}
+                    >
+                      {pages}
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
+                </ButtonGroup>
+              </ButtonToolbar>
+            </div>
           </div>
         </div>
       ) : (
         <></>
       )}
+
+      <NewTripModal
+        showModalNewTrip={showModalNewTrip}
+        handleCloseModalNewTrip={handleCloseModalNewTrip}
+        inputHandlerFunction={inputHandlerFunction}
+        newTripFunction={newTripFunction}
+      />
+
     </div>
   );
 };
