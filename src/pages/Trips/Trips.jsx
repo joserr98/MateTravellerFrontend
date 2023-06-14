@@ -6,7 +6,7 @@ import {
   getAllTrips,
   getPaginateTrips,
   newTrip,
-  deleteTrip
+  deleteTrip,
 } from "../../services/apiCalls";
 import Button from "react-bootstrap/Button";
 import { useCapitals, truncate } from "../../services/functions";
@@ -100,23 +100,23 @@ export const Trips = () => {
 
   const deleteTripFunction = (tripId) => {
     deleteTrip(rdxUserData.credentials, tripId)
-    .then(() => {
-      setShowConfirmationModal(false);
-      getAllTrips()
-      .then((results) => {
-        const currentPages = results.data.data.length;
-        const totalPages = Math.ceil(currentPages / 9);
-        setPages(totalPages);
+      .then(() => {
+        setShowConfirmationModal(false);
+        getAllTrips()
+          .then((results) => {
+            const currentPages = results.data.data.length;
+            const totalPages = Math.ceil(currentPages / 9);
+            setPages(totalPages);
+          })
+          .catch((err) => console.error(err));
+        getPaginateTrips(page)
+          .then((results) => {
+            setTrips(results.data.data.data);
+          })
+          .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
-      getPaginateTrips(page)
-      .then((results) => {
-        setTrips(results.data.data.data);
-      })
-      .catch((err) => console.error(err));
-    })
-    .catch((err) => console.error(err));
-  }
+  };
 
   const inputHandlerFunction = (e) => {
     setNewTripInfo((prevState) => ({
@@ -137,7 +137,19 @@ export const Trips = () => {
               <div className="trip" key={trip.id}>
                 <div className="tripsTitle">
                   <div className="tripsCity">{trip.city.toUpperCase()}</div>
-                  <div className="deleteTrips" onClick={() => {setShowConfirmationModal(true);setTripId(trip.id)}}><a>x</a></div>
+                  {rdxUserData.credentials.token.role_id == 3 ? (
+                    <div
+                      className="deleteTrips"
+                      onClick={() => {
+                        setShowConfirmationModal(true);
+                        setTripId(trip.id);
+                      }}
+                    >
+                      <a>x</a>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div className="tripsDates">
                   <div className="startDate">FROM: {trip.start_date}</div>
@@ -240,11 +252,11 @@ export const Trips = () => {
       />
 
       <ConfirmationModal
-      showConfirmationModal={showConfirmationModal}
-      handleCloseConfirmationModal={handleCloseConfirmationModal}
-      deleteTripFunction={deleteTripFunction}
-      name={"trip"}
-      tripId={tripId}
+        showConfirmationModal={showConfirmationModal}
+        handleCloseConfirmationModal={handleCloseConfirmationModal}
+        deleteTripFunction={deleteTripFunction}
+        name={"trip"}
+        tripId={tripId}
       />
     </div>
   );

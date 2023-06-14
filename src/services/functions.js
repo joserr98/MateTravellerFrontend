@@ -1,3 +1,4 @@
+// RETURNS GIVEN DATE BY DD/MM/YYYY FORMAT
 export const dateFormat = (date) => {
   var dateParts = date.split("-");
   var year = dateParts[0];
@@ -9,12 +10,14 @@ export const dateFormat = (date) => {
   return outputDate;
 };
 
+// OUTPUT DATE BY "02 Aug 2022" FORMAT
 export const dateFormatMonth = (date) => {
   const options = { day: "2-digit", month: "short", year: "numeric" };
   const outputDate = new Date(date);
   return outputDate.toLocaleString("en-US", options);
 };
 
+// CUT STRINGS BY LENGTH GIVEN
 export const truncate = (str, maxLength) => {
   if (str.length <= maxLength) {
     return str;
@@ -29,6 +32,7 @@ export const truncate = (str, maxLength) => {
   }
 };
 
+// GET AGE FROM 'YYYY-MM-DD'
 export const getAge = (birthDate) => {
   const today = new Date();
   let [year, month, day] = birthDate.split("-");
@@ -46,6 +50,7 @@ export const useCapitals = (text, option) => {
     return text;
   }
   
+  // SET TO CAPITAL ANY FIRST LETTER FROM A WORD 
   if (option == "first") {
     const lowerCaseText = text.toLowerCase();
     const words = lowerCaseText.split(" ");
@@ -61,6 +66,7 @@ export const useCapitals = (text, option) => {
     return transformedWords.join(" ");
   }
 
+  // SET TO CAPITAL FIRST LETTER OF THE TEXT AND WORDS BEFORE DOTS '.'
   if (option == "all") {
     const transformedText = text
       .toLowerCase()
