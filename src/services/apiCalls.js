@@ -58,8 +58,8 @@ export const joinTrip = async (credentials, tripId) => {
       Authorization: "Bearer " + credentials.jwt,
     },
   };
-
-  return await axios.post(`${url}/trips/${tripId}`, config);
+  
+  return await axios.post(`${url}/trips/${tripId}`, {}, config);
 };
 
 export const newTrip = async (credentials, body) => {
