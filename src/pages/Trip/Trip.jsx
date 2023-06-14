@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 import {
   getOrganizerFromTrip,
   getTravelersFromTrip,
+  joinTrip
 } from "../../services/apiCalls";
 import { getAge, truncate, dateFormatMonth } from "../../services/functions";
 import { Button, Table } from "react-bootstrap";
 export const Trip = () => {
+
   const rdxUserData = useSelector(userData);
   const rdxTripData = useSelector(detailData);
 
@@ -31,6 +33,18 @@ export const Trip = () => {
       })
       .catch((err) => console.error(err));
   }, []);
+
+  const joinTripFunction = (tripId) => {
+    joinTrip(tripId, rdxUserData.credentials)
+    .then(() => {
+      getTravelersFromTrip(rdxTripData)
+      .then((results) => {
+        setTravelers(results.data.usersFromTrip);
+      })
+      .catch((err) => console.error(err));
+    })
+    .catch((err) => console.error(err));
+  }
 
   return (
     <div className="tripDeisgn">
@@ -53,7 +67,7 @@ export const Trip = () => {
               <div className="tripJoin">
                 <Button
                   className="joinTripButton"
-                  onClick={() => joinTripFunction()}
+                  onClick={() => joinTripFunction(rdxTripData.data.id)}
                 >
                   Join Trip
                 </Button>
@@ -84,7 +98,7 @@ export const Trip = () => {
                       <tr>
                         <td>
                           <div className="tripTravelerName" title={traveler.name}>
-                            {truncate(traveler.name, 20)}, {getAge(traveler.birthday)}{" "}
+                            <a className="link">{truncate(traveler.name, 20)}</a>, {getAge(traveler.birthday)}{" "}
                           </div>
                         </td>
                         <td>

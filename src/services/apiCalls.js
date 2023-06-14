@@ -48,5 +48,15 @@ export const getOrganizerFromTrip = async (trip) => {
     return await axios.get(`${url}/users/organizer/trips/${trip.data.id}`);
 };
 
+export const joinTrip = async (tripId, credentials) => {
+    const config = {
+        headers: {
+          Authorization: "Bearer 9|9qIhAJGa9paZ4FOcAVVvE58fCgyUfAEmzPDPGKUv",
+        }
+      }
+
+    return await axios.post(`${url}/trips/${tripId}`, config);
+};
+
 
 

@@ -209,6 +209,12 @@
     width: 100%;
 }
 
+.link{
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
 @media (max-width: 600px) {
     .tripCardInfo{
         flex-direction: column;
