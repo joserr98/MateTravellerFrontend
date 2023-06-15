@@ -7,16 +7,18 @@ import { useNavigate } from "react-router-dom";
 import {
   getOrganizerFromTrip,
   getTravelersFromTrip,
-  joinTrip
+  joinTrip,
 } from "../../services/apiCalls";
 import { getAge, truncate, dateFormatMonth } from "../../services/functions";
 import { Button, Table } from "react-bootstrap";
+import { DataUserModal } from "../../common/DataUserModal/DataUserModal";
 export const Trip = () => {
-
   const rdxUserData = useSelector(userData);
   const rdxTripData = useSelector(detailData);
   const [organizer, setOrganizer] = useState({});
   const [travelers, setTravelers] = useState([]);
+  const [showModalUserData, setShowModalUserData] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({})
 
   useEffect(() => {
     getOrganizerFromTrip(rdxTripData)
@@ -34,15 +36,23 @@ export const Trip = () => {
 
   const joinTripFunction = (tripId) => {
     joinTrip(rdxUserData.credentials, tripId)
-    .then(() => {
-      getTravelersFromTrip(rdxTripData)
-      .then((results) => {
-        setTravelers(results.data.usersFromTrip);
+      .then(() => {
+        getTravelersFromTrip(rdxTripData)
+          .then((results) => {
+            setTravelers(results.data.usersFromTrip);
+          })
+          .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
-    })
-    .catch((err) => console.error(err));
-  }
+  };
+
+  const handleOpenModalUserData = () => {
+    setShowModalUserData(true);
+  };
+
+  const handleCloseModalUserData = () => {
+    setShowModalUserData(false);
+  };
 
   return (
     <div className="tripDeisgn">
@@ -52,10 +62,14 @@ export const Trip = () => {
           <div className="tripCardInfo">
             <div className="tripDetails">
               <div className="tripDate">
-                <div className="tripStartDate"> {""}
+                <div className="tripStartDate">
+                  {" "}
+                  {""}
                   {dateFormatMonth(rdxTripData.data.start_date)}
                 </div>
-                <div className="tripEndDate"> {""}
+                <div className="tripEndDate">
+                  {" "}
+                  {""}
                   {dateFormatMonth(rdxTripData.data.end_date)}
                 </div>
               </div>
@@ -75,7 +89,7 @@ export const Trip = () => {
               <div className="tripParticipantsTitle">Participants</div>
               <div className="tripOrganizerContainer">
                 <div className="tripOrganizerTitle">Organizer</div>
-                <div className="tripOrganizer">{organizer.name}</div>
+                <div className="tripOrganizer" onClick={() => {handleOpenModalUserData(organizer); setSelectedUser(organizer)}}>{organizer.name}</div>
               </div>
               <div className="tripTraveler">
                 <div className="tripUser"></div>
@@ -91,12 +105,21 @@ export const Trip = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody key={'tableBody'}>
+                  <tbody key={"tableBody"}>
                     {travelers.map((traveler) => (
                       <tr key={traveler.id}>
                         <td>
-                          <div className="tripTravelerName" title={traveler.name}>
-                            <a className="link">{truncate(traveler.name, 20)}</a>, {getAge(traveler.birthday)}{" "}
+                          <div
+                            className="tripTravelerName"
+                            title={traveler.name}
+                          >
+                            <a
+                              className="link"
+                              onClick={() => {handleOpenModalUserData(traveler); setSelectedUser(traveler)}}
+                            >
+                              {truncate(traveler.name, 20)}
+                            </a>
+                            , {getAge(traveler.birthday)}{" "}
                           </div>
                         </td>
                         <td>
@@ -115,6 +138,12 @@ export const Trip = () => {
             </div>
           </div>
         </div>
+
+        <DataUserModal
+          showModalUserData={showModalUserData}
+          handleCloseModalUserData={handleCloseModalUserData}
+          selectedUser={selectedUser}
+        />
       </div>
     </div>
   );

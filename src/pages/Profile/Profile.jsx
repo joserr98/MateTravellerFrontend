@@ -37,7 +37,7 @@ export const Profile = () => {
     setShowConfirmationModal(false);
   };
 
-  const handleOpenModalEdit = (user) => {
+  const handleOpenModalEdit = () => {
     setShowModalProfileEdit(true);
   };
 
