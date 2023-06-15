@@ -3,7 +3,6 @@ import "./Trip.css";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { detailData } from "../detailSlice";
-import { useNavigate } from "react-router-dom";
 import {
   getOrganizerFromTrip,
   getTravelersFromTrip,
@@ -11,7 +10,8 @@ import {
 } from "../../services/apiCalls";
 import { getAge, truncate, dateFormatMonth } from "../../services/functions";
 import { Button, Table } from "react-bootstrap";
-import { DataUserModal } from "../../common/DataUserModal/DataUserModal";
+import { PrivateMessageModal } from "../../common/PrivateMessageModal/PrivateMessageModal";
+
 export const Trip = () => {
   const rdxUserData = useSelector(userData);
   const rdxTripData = useSelector(detailData);
@@ -139,7 +139,7 @@ export const Trip = () => {
           </div>
         </div>
 
-        <DataUserModal
+        <PrivateMessageModal
           showModalUserData={showModalUserData}
           handleCloseModalUserData={handleCloseModalUserData}
           selectedUser={selectedUser}

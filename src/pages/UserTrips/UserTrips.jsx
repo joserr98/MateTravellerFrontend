@@ -9,7 +9,7 @@ import {
   deleteTrip,
 } from "../../services/apiCalls";
 import { truncate } from "../../services/functions";
-import { Button, ButtonGroup, ButtonToolbar } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { ConfirmationModal } from "../../common/ConfirmationModal/ConfirmationModal";
 import { detail } from "../detailSlice";
 

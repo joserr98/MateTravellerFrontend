@@ -1,8 +1,8 @@
 import React from "react";
+import './PrivateMessageModal.css'
 import { Button, Modal, Form } from "react-bootstrap";
-import Toast from "react-bootstrap/Toast";
 
-export const DataUserModal = ({
+export const PrivateMessageModal = ({
   showModalUserData,
   handleCloseModalUserData,
   selectedUser
@@ -15,7 +15,11 @@ export const DataUserModal = ({
     }));
   };
 
-  const sendMessage = () => {};
+  const sendMessageFunction = () => {
+    sendMessage()
+    .then((e) => e)
+    .catch((err)=> console.error(err))
+  };
 
   return (
     <Modal show={showModalUserData} onHide={handleCloseModalUserData}>
@@ -32,7 +36,7 @@ export const DataUserModal = ({
               as={"textarea"}
               placeholder={"write here your message..."}
               name={"message"}
-              rows={4}
+              rows={5}
               onChange={(e) => inputHandlerFunction(e)}
               autoFocus
             />
@@ -43,7 +47,7 @@ export const DataUserModal = ({
         <Button variant="secondary" onClick={handleCloseModalUserData}>
           Close
         </Button>
-        <Button variant="primary" onClick={() => sendMessage()}>
+        <Button variant="primary" onClick={() => sendMessageFunction()}>
           Send Message
         </Button>
       </Modal.Footer>
