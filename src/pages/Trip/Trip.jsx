@@ -27,7 +27,6 @@ export const Trip = () => {
 
     getTravelersFromTrip(rdxTripData)
       .then((results) => {
-        console.log(results)
         setTravelers(results.data.usersFromTrip);
       })
       .catch((err) => console.error(err));

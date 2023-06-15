@@ -140,6 +140,7 @@
     font-weight: bold;
 }
 
+
 .tripOrganizerContainer{
     border-bottom: 3px solid #072D45;
     display: flex;
@@ -234,6 +235,13 @@
     color: #D46F2B;
 }
 
+thead{
+    border-bottom: 1px solid #072D45;
+}
+
+td{
+    border-bottom: 1px solid #072D45 !important;
+}
 @media (max-width: 600px) {
     .tripCardInfo{
         flex-direction: column;
