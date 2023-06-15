@@ -18,7 +18,7 @@ export const Trip = () => {
   const [organizer, setOrganizer] = useState({});
   const [travelers, setTravelers] = useState([]);
   const [showModalUserData, setShowModalUserData] = useState(false);
-  const [selectedUser, setSelectedUser] = useState({})
+  const [selectedUser, setSelectedUser] = useState({});
 
   useEffect(() => {
     getOrganizerFromTrip(rdxTripData)
@@ -52,6 +52,19 @@ export const Trip = () => {
 
   const handleCloseModalUserData = () => {
     setShowModalUserData(false);
+  };
+
+  const isTravelerOrOrganizer = () => {
+    if (
+      rdxUserData.credentials.token.id == organizer.user_id ||
+      travelers.some(
+        (traveler) => traveler.user_id == rdxUserData.credentials.token.id
+      )
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -89,7 +102,21 @@ export const Trip = () => {
               <div className="tripParticipantsTitle">Participants</div>
               <div className="tripOrganizerContainer">
                 <div className="tripOrganizerTitle">Organizer</div>
-                <div className="tripOrganizer" onClick={() => {handleOpenModalUserData(organizer); setSelectedUser(organizer)}}>{organizer.name}</div>
+                <div className="tripOrganizer">
+                  {isTravelerOrOrganizer() ? (
+                    <a
+                      className="link"
+                      onClick={() => {
+                        handleOpenModalUserData(organizer);
+                        setSelectedUser(organizer);
+                      }}
+                    >
+                      {organizer.name}
+                    </a>
+                  ) : (
+                    <span>{organizer.name}</span>
+                  )}
+                </div>
               </div>
               <div className="tripTraveler">
                 <div className="tripUser"></div>
@@ -113,13 +140,25 @@ export const Trip = () => {
                             className="tripTravelerName"
                             title={traveler.name}
                           >
-                            <a
-                              className="link"
-                              onClick={() => {handleOpenModalUserData(traveler); setSelectedUser(traveler)}}
-                            >
-                              {truncate(traveler.name, 20)}
-                            </a>
-                            , {getAge(traveler.birthday)}{" "}
+                            {isTravelerOrOrganizer() &&
+                            rdxUserData.credentials.token.id !==
+                              traveler.user_id ? (
+                              <a
+                                className="link"
+                                onClick={() => {
+                                  handleOpenModalUserData(traveler);
+                                  setSelectedUser(traveler);
+                                }}
+                              >
+                                {truncate(traveler.name, 20)},{" "}
+                                {getAge(traveler.birthday)}{" "}
+                              </a>
+                            ) : (
+                              <>
+                                {truncate(traveler.name, 20)},{" "}
+                                {getAge(traveler.birthday)}{" "}
+                              </>
+                            )}
                           </div>
                         </td>
                         <td>
