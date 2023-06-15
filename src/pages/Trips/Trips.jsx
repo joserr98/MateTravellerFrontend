@@ -9,7 +9,7 @@ import {
   deleteTrip,
 } from "../../services/apiCalls";
 import Button from "react-bootstrap/Button";
-import { useCapitals, truncate } from "../../services/functions";
+import { useCapitals, truncate, dateFormatMonth } from "../../services/functions";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import { useNavigate } from "react-router-dom";
@@ -152,11 +152,11 @@ export const Trips = () => {
                   )}
                 </div>
                 <div className="tripsDates">
-                  <div className="startDate">FROM: {trip.start_date}</div>
-                  <div className="endDate">TO: {trip.end_date}</div>
+                  <div className="startDate">{dateFormatMonth(trip.start_date)}</div>
+                  <div className="endDate">{dateFormatMonth(trip.end_date)}</div>
                 </div>
-                <div className="tripsDescription" title={trip.description}>
-                  {truncate(trip.description, 100)}
+                <div className="tripsDescription">
+                  {trip.description}
                 </div>
                 {userCredentials != 0 ? (
                   <div className="tripsButton">

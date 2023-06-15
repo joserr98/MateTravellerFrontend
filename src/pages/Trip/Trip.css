@@ -1,7 +1,5 @@
 .tripDeisgn{
-    background-color: #6e387b;
-    background-color: #4C1E4F;
-    background-image: linear-gradient(160deg, #6e387b 0%, #fe5f55 100%);
+    background-image: linear-gradient(160deg, #1982C4 0%, #072D45 100%);
     color: white;
     width: 100vw;
     min-height: 87vh;
@@ -29,7 +27,7 @@
 }
 
 .tripCardTitle{
-    background-color: #00654d;
+    background-color: #072D45;
     font-size: 2em;
     border-radius: 1em 1em 0 0;
     height: 10%;
@@ -37,6 +35,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
 }
 
 .tripCardInfo{
@@ -44,10 +45,13 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: row;
-    background-color: #212529;
-    border: 5px solid #00654d;
+    background-color: #f8f9fa;
+    color: black;
+
+    border: 5px solid #1982C4;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
 }
 
 .tripDate{
@@ -57,6 +61,9 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-bottom: 3px solid black;
 }
 
 .tripStartDate{
@@ -89,6 +96,7 @@
     display: flex;
     flex-direction: row;
     padding: 2em;
+    font-weight: bold;
 }
 
 .tripJoin{
@@ -103,13 +111,14 @@
 }
 
 .joinTripButton{
-    background-color: #00654d;
-    border: 1px solid #004838;
+    background-color: #1982C4;
+    border: 1px solid white;
 }
 
 .joinTripButton:hover{
-    background-color: #004838;
-    border: 1px solid #004838;
+    background-color: #072D45;
+    border: 1px solid white;
+    color: white;
 }
 
 .tripDetails{
@@ -119,7 +128,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;    
-    border-right:3px solid #004838; 
+    border-right: 3px solid #072D45; 
 }
 
 .tripParticipants{
@@ -128,9 +137,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;    
+    font-weight: bold;
 }
 
 .tripOrganizerContainer{
+    border-bottom: 3px solid #072D45;
     display: flex;
     height: 10%;
     width: 100%;
@@ -162,6 +173,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 3px solid #072D45;
+
 }
 
 .tripTraveler{
@@ -179,22 +192,22 @@
 .tripTravelerNameTitle{
     width: 100%;
     font-size: 1.2rem;
-    border-bottom: 3px solid #00654d;
+    border-bottom: 3px solid #072D45;
 
 }
 
 .tripTravelerAgeTitle{
     width: 100%;
     font-size: 1.2rem;
-    border-bottom: 3px solid #00654d;
-    border-right: 2px solid #00654d;
+    border-bottom: 3px solid #072D45;
+    border-right: 2px solid #072D45;
 }
 
 .tripTravelerCountryTitle{
     width: 100%;
     font-size: 1.2rem;
-    border-bottom: 3px solid #00654d;
-    border-left: 2px solid #00654d;
+    border-bottom: 3px solid #072D45;
+    border-left: 2px solid #072D45;
 }
 
 .tripTravelerName{
@@ -211,8 +224,14 @@
 
 .link{
     cursor: pointer;
-    color: white;
     text-decoration: none;
+    color:#E1B36B;
+}
+
+.link:hover{
+    cursor: pointer;
+    text-decoration: none;
+    color: #D46F2B;
 }
 
 @media (max-width: 600px) {
@@ -220,18 +239,26 @@
         flex-direction: column;
     }
     .tripDetails{
+        height: 100%;
         width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;    
+        border-right: none;
     }
     .tripParticipants{
         width: 100%;
         border: none;
     }
     .tripParticipantsTitle{
-        border-top: 3px solid #00654d;
-        border-bottom: 3px solid #00654d;
+        border-top: 3px solid #072D45;
+        border-bottom: 3px solid #072D45;
+
     }
     .tripOrganizerContainer{
-        border-bottom: 3px solid #00654d;
+        border-bottom: 3px solid #072D45;
     }
+
   }
 

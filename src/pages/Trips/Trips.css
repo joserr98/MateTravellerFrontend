@@ -1,7 +1,5 @@
 .tripsDeisgn{
-    background-color: #6e387b;
-    background-color: #4C1E4F;
-    background-image: linear-gradient(160deg, #6e387b 0%, #fe5f55 100%);
+    background-image: linear-gradient(160deg, #1982C4 0%, #072D45 100%);
     color: white;
     width: 100vw;
     min-height: 87vh;
@@ -77,28 +75,30 @@
     width: 100%;
     height: 15em;
     padding: 0.2em;
-    background-color: #00916E;
+    background-color: white;
     border-radius: 1em;
+    border: 3px solid;
+    border-color: #E1B36B ;
 }
 
-.trip:hover{
+/* .trip:hover{
     background-color: #C08497;
     width: 100%;
     height: 15em;
     padding: 0.2em;
-}
+} */
 
 .tripsTitle{
     display: flex;
-    background-color: #00654d;
+    background-color: #D46F2B;
     border-radius: 1em 1em 0 0;
 }
 
-.tripsTitle:hover{
+/* .tripsTitle:hover{
     display: flex;
     background-color: #6F5060;
     border-radius: 1em 1em 0 0;
-}
+} */
 
 .tripsCity{
     width: 100%;
@@ -112,7 +112,8 @@
 .deleteTrips{
     margin-left: -1em;
     cursor: pointer;
-    color: #fe5f55;
+    color: #D46F2B;
+    font-size: 1.2em;
 }
 
 .deleteTrips:hover{
@@ -124,20 +125,25 @@
     padding: 0.2em 0 0.2em 0;
     height: 15%;
     max-height: 15%;
-    color: #201335;
+    color: black;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
 }
 
 .tripsDescription{
     height: 40%;
-    color: #201335;
+    color: #072D45;
     max-height: 40%;
     padding-top: 1em;
     display: flex;
     justify-content:space-around;
     flex-direction: row;
+    background-color: #BDD0DF;
+    border: 2px solid white;
+    overflow-y: auto;
 }
 
 .tripsButton{
@@ -148,26 +154,35 @@
     justify-content:center;
     align-items: center;
     flex-direction: row;
+    
 }
 
 .showTripButton{
     height: 100%;
-    color: #E7EB90;
-    background-color: #6F5060;
-    border: 2px solid #51344D;
+    width: 70%;
+    color: white;
+    background-color: #1982C4;
+    border: 0.1em white solid;
+    margin-top: 1em;
     display: flex;
     align-items: center;
     justify-content:center;
+    border-radius: 0.7em
 }
+
 
 .showTripButton:hover{
     height: 100%;
-    color: #E7EB90;
-    background-color: #51344D;
-    border: 2px solid #51344D;
+    width: 70%;
+    background-color: #072D45;
+    border: 0.1em #1982C4 solid;
+    font-weight: bold;
+    color: white;
+    margin-top: 1em;
     display: flex;
     align-items: center;
     justify-content:center;
+    border-radius: 0.7em
 }
 
 

@@ -1,8 +1,5 @@
 .profileDesign{
-    /* background-color: #6e387b;
-    background-color: #fe5f55; */
-    background-color: #587B7F; 
-    /* background-image: linear-gradient(160deg, #6e387b 0%, #fe5f55 100%); */
+    background-image: linear-gradient(160deg, #1982C4 0%, #072D45 100%);
     width: 100vw;
     height: 100%;
     min-height: 87vh;
@@ -12,15 +9,14 @@
 }
 
 .profileContainer{
-    color: black;
     margin-top: 3em;
     margin-bottom: 0.5em;
     height: 90%;
     font-size: 1.5em;
     width: 70%;
     border-radius: 15px;
-    border: 5px solid #49676a;
-    background-color: #E1DEE3;
+    border: 5px solid white;
+    background-color: #BDD0DF;
 }
 
 .flexEnd{
@@ -47,7 +43,7 @@
 }
 
 .row{
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid white;
 }
 
 .profileLogo:hover{
@@ -58,42 +54,51 @@
 .editProfileBtn{
     width: 50%;
     margin-top: 0.5em;
-    background-color: #06D6A0;
-    border: 0.1em #05bc8b solid;
+    background-color: #1982C4;
+    border: 0.1em white solid;
     margin-bottom: 0.5em;
 }
 
 .editProfileBtn:hover{
-    background-color: #05bc8b;
-    border: 0.1em #05bc8b solid;
+    background-color: #072D45;
+    border: 0.1em white solid;
+    color: white;
+    font-weight: bold;
 }
 
 .deleteProfileBtn{
     width: 50%;
     margin-top: 0.5em;
-    background-color: #fb2f21;
-    border: 0.1em #cb261a solid;
+    background-color: #E1B36B;
+    border: 0.1em #D46F2B solid;
     margin-bottom: 0.5em;
 }
 
 .deleteProfileBtn:hover{
-    background-color: #cb261a;
-    border: 0.1em #cb261a solid;
+    background-color: #D46F2B;
+    border: 0.1em white solid;
+    color: white;
+    font-weight: bold;
 }
 
 .profileButtons{
     display: flex;
-
 }
 
 @media (max-width: 560px) {
     .deleteProfileBtn{
-        width: 100%;
+        width: 90%;
     }
     .editProfileBtn{
-        width: 100%;
+        width: 90%;
     }
     .profileButtons{
         flex-direction: column;
+        display: flex;
+        align-items: center;
+    }
+    .profileContainer{
+        margin-top: 8em;
+        font-size: 0.8em;
     }
 }

@@ -50,6 +50,7 @@ export const Header = () => {
                       {rdxUserData.credentials.token.name}
                 </Nav.Link>
                 <Nav.Link className="navbarLinks" onClick={() => navigate("/trips")}>Trips</Nav.Link>
+                <Nav.Link className="navbarLinks" onClick={() => navigate("/user/trips")}>My Trips</Nav.Link>
                 <Nav.Link className="navbarLinks" onClick={() => logoutUserFunction()}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>

@@ -52,6 +52,16 @@ export const getOrganizerFromTrip = async (trip) => {
   return await axios.get(`${url}/users/organizer/trips/${trip.data.id}`);
 };
 
+export const getUserTrips = async (credentials) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + credentials.jwt,
+    },
+  };
+
+  return await axios.get(`${url}/trips/users/${credentials.token.id}`, config);
+};
+
 export const joinTrip = async (credentials, tripId) => {
   const config = {
     headers: {

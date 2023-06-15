@@ -15,10 +15,8 @@ export const Trip = () => {
 
   const rdxUserData = useSelector(userData);
   const rdxTripData = useSelector(detailData);
-
   const [organizer, setOrganizer] = useState({});
   const [travelers, setTravelers] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getOrganizerFromTrip(rdxTripData)
@@ -29,6 +27,7 @@ export const Trip = () => {
 
     getTravelersFromTrip(rdxTripData)
       .then((results) => {
+        console.log(results)
         setTravelers(results.data.usersFromTrip);
       })
       .catch((err) => console.error(err));
@@ -54,10 +53,10 @@ export const Trip = () => {
           <div className="tripCardInfo">
             <div className="tripDetails">
               <div className="tripDate">
-                <div className="tripStartDate">From: {""}
+                <div className="tripStartDate"> {""}
                   {dateFormatMonth(rdxTripData.data.start_date)}
                 </div>
-                <div className="tripEndDate">To: {""}
+                <div className="tripEndDate"> {""}
                   {dateFormatMonth(rdxTripData.data.end_date)}
                 </div>
               </div>
@@ -82,7 +81,7 @@ export const Trip = () => {
               <div className="tripTraveler">
                 <div className="tripUser"></div>
 
-                <Table striped bordered hover variant="dark">
+                <Table striped bordered hover variant="light">
                   <thead>
                     <tr>
                       <th>
@@ -93,9 +92,9 @@ export const Trip = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody key={'tableBody'}>
                     {travelers.map((traveler) => (
-                      <tr>
+                      <tr key={traveler.id}>
                         <td>
                           <div className="tripTravelerName" title={traveler.name}>
                             <a className="link">{truncate(traveler.name, 20)}</a>, {getAge(traveler.birthday)}{" "}
