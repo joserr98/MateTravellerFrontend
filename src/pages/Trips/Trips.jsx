@@ -129,7 +129,7 @@ export const Trips = () => {
   };
 
   return (
-    <div className="tripsDeisgn">
+    <div className="tripsDesign">
       {trips.length !== 0 ? (
         <div className="tripsContainer">
           <div className="trips">

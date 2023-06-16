@@ -1,4 +1,4 @@
-.tripsDeisgn{
+.tripsDesign{
     background-image: linear-gradient(160deg, #1982C4 0%, #072D45 100%);
     color: white;
     width: 100vw;
@@ -21,7 +21,6 @@
     display: grid;
     grid-template-columns: 32.3% 32.3% 32.3%;
     grid-gap: 1em;
-    min-height: 48em;
 }
 
 .options{
@@ -129,6 +128,7 @@
     display: flex;
     justify-content: space-around;
     flex-direction: row;
+    align-items: center;
     border-bottom: 2px solid;
     border-top: 2px solid;
 }
@@ -186,16 +186,28 @@
 }
 
 
-@media (max-width: 750px) {
+@media (max-width: 990px) {
+    .tripsDates{
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 870px) {
     .trips{
         width: 100%;
         display: grid;
         grid-template-columns: 48% 48%;
         grid-gap: 1em;
     }
+    .tripsDates{
+        font-size: 0.7rem;
+    }
 } 
 
-@media (max-width: 450px) {
+@media (max-width: 470px) {
+    .tripsDates{
+        font-size: 0.6rem;
+    }
     .trips{
         width: 100%;
         display: grid;
