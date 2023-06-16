@@ -70,7 +70,7 @@ export const Profile = () => {
       .catch((error) => console.error(error));
   };
 
-  const deleteUserFunction = () => {
+  const deleteProfileFunction = () => {
     deleteUser(rdxUserData.credentials)
       .then(() => {
         handleCloseConfirmationModal();
@@ -169,7 +169,7 @@ export const Profile = () => {
       <ConfirmationModal
       showConfirmationModal={showConfirmationModal}
       handleCloseConfirmationModal={handleCloseConfirmationModal}
-      deleteUserFunction={deleteUserFunction}
+      deleteProfileFunction={deleteProfileFunction}
       name={"profile"}
       />
     </div>

@@ -4,10 +4,12 @@ import { Modal, Button } from "react-bootstrap";
 export const ConfirmationModal = ({
   showConfirmationModal,
   handleCloseConfirmationModal,
+  deleteProfileFunction,
   deleteUserFunction,
   deleteTripFunction,
   name,
-  tripId
+  tripId,
+  userId
 }) => {
   return (
     <Modal show={showConfirmationModal} onHide={handleCloseConfirmationModal}>
@@ -25,8 +27,8 @@ export const ConfirmationModal = ({
         >
           Cancel
         </Button>
-        {deleteUserFunction ? (
-          <Button variant="danger" onClick={() => deleteUserFunction()}>
+        {deleteProfileFunction ? (
+          <Button variant="danger" onClick={() => deleteProfileFunction()}>
             Delete
           </Button>
         ) : (
@@ -34,6 +36,13 @@ export const ConfirmationModal = ({
         )}
         {deleteTripFunction ? (
           <Button variant="danger" onClick={() => deleteTripFunction(tripId)}>
+            Delete
+          </Button>
+        ) : (
+          <></>
+        )}
+        {deleteUserFunction ? (
+          <Button variant="danger" onClick={() => deleteUserFunction(userId)}>
             Delete
           </Button>
         ) : (

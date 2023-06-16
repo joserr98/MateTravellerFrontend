@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./Admin.css";
 import { ConfirmationModal } from "../../common/ConfirmationModal/ConfirmationModal";
-import { Form, InputGroup } from "react-bootstrap";
+import { Button, ButtonGroup, ButtonToolbar, Form, InputGroup } from "react-bootstrap";
 import { FcSearch } from "react-icons/fc";
+import { AiFillDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
+import { getUsersPaginate, deleteUser } from "../../services/apiCalls";
+import { dateFormatMonth, getAge, truncate, useCapitals } from "../../services/functions";
 
 export const Admin = () => {
+  const ADMIN_ROLE = 3;
   const [users, setUsers] = useState([]);
-  const userDataRdx = useSelector(userData);
+  const rdxUserData = useSelector(userData);
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState("");
+  const [selectedUser, setSelectedUser] = useState("");
   const navigate = useNavigate();
   const [criteria, setCriteria] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -22,116 +29,110 @@ export const Admin = () => {
     setCriteria(e.target.value);
   };
 
-  const handleDeleteUser = (user) => {
-    setSelectedUser(user);
+  const handleDeleteUser = () => {
     setShowConfirmationModal(true);
+  };
+
+  const deleteUserFunction = (selectedUser) => {
+    deleteUser(rdxUserData.credentials, selectedUser)
+    .then(() => {
+      handleCloseConfirmationModal();
+      getUsersPaginate(page)
+      .then((results) => {
+        setUsers(results.data.data.data);
+      })
+      .catch((err) => console.error(err));
+    })
+    .catch((error) => console.error(error));
+  }
+
+  const setPageFunction = (newPage) => {
+    setPage(newPage);
+    getUsersPaginate(newPage)
+      .then((results) => {
+        setUsers(results.data.data.data);
+      })
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
     if (
-      !userDataRdx.credentials.token ||
-      userDataRdx.credentials.token.role !== "admin"
+      !rdxUserData.credentials.token ||
+      rdxUserData.credentials.token.role_id != ADMIN_ROLE
     ) {
-    //   navigate("/");
+      navigate("/");
     }
-  }, []);
 
-  const deleteUserFunction = () => {
-    deleteUser(rdxUserData.credentials)
-      .then(() => {
-        handleCloseConfirmationModal();
+    getUsersPaginate(page)
+      .then((res) => {
+        setUsers(res.data.data.data);
+        setPages(res.data.data.total_pages)
       })
       .catch((error) => console.error(error));
-  };
-
-//   useEffect(() => {
-//     if (criteria !== "") {
-//       const bringUsers = setTimeout(() => {
-//         getUsers(userDataRdx.credentials, criteria)
-//           .then((res) => {
-//             setUsers(res.data);
-//           })
-//           .catch((error) => console.log(error));
-//       }, 375);
-
-//       return () => clearTimeout(bringUsers);
-//     } else {
-//       getUsers(userDataRdx.credentials)
-//         .then((results) => {
-//           setUsers(results.data);
-//         })
-//         .catch((err) => console.error(err));
-//     }
-//   }, [criteria]);
+  }, []);
 
   return (
     <div className="adminDesign">
-      <div className="adminInput">
+      <div className="adminSearchInput">
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">
             <FcSearch />
           </InputGroup.Text>
           <Form.Control
             type="text"
-            placeholder="search"
+            placeholder="Filter by name, surname, email, country..."
             name="criteria"
             onChange={(e) => inputHandler(e)}
           />
         </InputGroup>
       </div>
-      {users && users.length > 0 ? (
+      {users.length > 0 ? (
         <div className="adminTable">
-          <table className="table table-striped table-bordered table-hover usersTable">
+          <table className="usersTable">
             <thead className="fixed">
               <tr>
-                <th style={{ width: "30%" }}>Name</th>
-                <th style={{ width: "30%" }}>Email</th>
-                <th style={{ width: "10%" }}>Phone</th>
-                <th style={{ width: "25%" }}>Address</th>
-                <th style={{ width: "5%" }}></th>
+                <th className="th" style={{ width: "20%" }}>
+                  Name
+                </th>
+                <th className="th" style={{ width: "30%" }}>
+                  Email
+                </th>
+                <th className="th" style={{ width: "20%" }}>
+                  Birthday
+                </th>
+                <th className="thCountry" style={{ width: "25%" }}>
+                  Country
+                </th>
+                <th className="thOptions" style={{ width: "5%" }}></th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr className="selectedRow" key={user._id}>
+                <tr className="selectedRow" key={user.id}>
                   <td
                     title={
-                      capitalizeWords(user.name) +
+                      useCapitals(user.name, "first") +
                       " " +
-                      capitalizeWords(user.lastname)
+                      useCapitals(user.lastname, "first")
                     }
                   >
-                    {truncate(
-                      capitalizeWords(`${user.name} ${user.lastname}`),
-                      30
-                    )}
+                    {truncate(useCapitals(user.name, "first"), 15)}
                   </td>
                   <td title={user.email}>
-                    {truncate(capitalizeWords(user.email), 20)}
+                    {truncate(useCapitals(user.email, "first"), 20)}
                   </td>
-                  <td title={user.phone_number}>{user.phone_number}</td>
-                  <td title={user.address}>
-                    {truncate(capitalizeWords(user.address), 22)}
+                  <td title={user.birthday}>{dateFormatMonth(user.birthday)}</td>
+                  <td title={user.country}>
+                    {truncate(useCapitals(user.country, "first"), 10)}
                   </td>
-                  <td>
-                    <div className="adminButtons">
-                      <FaEye
-                        className="appointmentsButton detail"
-                        onClick={() => handleOpenModalInfo(user)}
-                      />
-
-                      <FiEdit
-                        className="appointmentsButton edit"
-                        title="Edit appointment"
-                        onClick={() => handleOpenModalEdit(user)}
-                      />
+                  <td className="adminButtons">
+                    <div>
                       <AiFillDelete
-                        className="appointmentsButton delete"
+                        className="delete"
                         title="Delete appointment"
-                        onClick={() => {
-                          handleDeleteUser(user);
-                          deleteUserFunction();
-                        }}
+                        onClick={() =>{ 
+                            handleDeleteUser();
+                            setSelectedUser(user.id)}}
                       />
                     </div>
                   </td>
@@ -143,11 +144,61 @@ export const Admin = () => {
       ) : (
         <></>
       )}
+
+      <div className="userPagination">
+        <ButtonToolbar aria-label="Toolbar with button groups">
+          <ButtonGroup className="me-2">
+            {page != 1 ? (
+              <Button
+                className="paginationButton"
+                onClick={() => setPageFunction(1)}
+              >
+                1
+              </Button>
+            ) : (
+              <></>
+            )}
+            {page !== 1 && page !== 2 ? (
+              <Button
+                className="paginationButton"
+                onClick={() => setPageFunction(page - 1)}
+              >
+                Previous
+              </Button>
+            ) : (
+              <></>
+            )}
+            <Button className="paginationButton activePage">{page}</Button>
+            {page !== pages && page !== pages - 1 ? (
+              <Button
+                className="paginationButton"
+                onClick={() => setPageFunction(page + 1)}
+              >
+                Next
+              </Button>
+            ) : (
+              <></>
+            )}
+            {page != pages ? (
+              <Button
+                className="paginationButton"
+                onClick={() => setPageFunction(pages)}
+              >
+                {pages}
+              </Button>
+            ) : (
+              <></>
+            )}
+          </ButtonGroup>
+        </ButtonToolbar>
+      </div>
+
       <ConfirmationModal
         showConfirmationModal={showConfirmationModal}
         handleCloseConfirmationModal={handleCloseConfirmationModal}
         deleteUserFunction={deleteUserFunction}
-        name={"profile"}
+        name={"user"}
+        userId={selectedUser}
       />
     </div>
   );

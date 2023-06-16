@@ -8,6 +8,10 @@ export const loginUser = async (credentials) => {
   return await axios.post(`${url}/login`, credentials);
 };
 
+export const getUsersPaginate = async (page) => {
+  return await axios.get(`${url}/users/pages?page=${page}`);
+};
+
 export const registerUser = async (credentials) => {
   return await axios.post(`${url}/users`, credentials);
 };
@@ -26,14 +30,14 @@ export const editUser = async (credentials, body) => {
   );
 };
 
-export const deleteUser = async (credentials) => {
+export const deleteUser = async (credentials, userId) => {
   const config = {
     headers: {
       Authorization: "Bearer " + credentials.jwt,
     },
   };
-
-  return await axios.delete(`${url}/users/${credentials.token.id}`, config);
+  console.log(userId)
+  return await axios.delete(`${url}/users/${userId}`, config);
 };
 
 // TRIPS ENDPOINTS
