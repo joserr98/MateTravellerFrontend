@@ -8,6 +8,7 @@ import { Trips } from '../Trips/Trips'
 import { Trip } from '../Trip/Trip'
 import { UserTrips } from '../UserTrips/UserTrips'
 import { Admin } from '../Admin/Admin'
+import { Messages } from '../Messages/Messages'
 
 export const Body = () => {
 
@@ -21,6 +22,7 @@ export const Body = () => {
         <Route path="/trip" element={<Trip/>} />
         <Route path="/user/trips" element={<UserTrips/>} />
         <Route path="/admin" element={<Admin/>} />
+        <Route path="/messages" element={<Messages/>} />
     </Routes>
   )
 }

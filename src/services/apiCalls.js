@@ -100,3 +100,13 @@ export const deleteTrip = async (credentials, tripId) => {
 
   return await axios.delete(`${url}/trips/${tripId}`, config);
 };
+
+export const getMessages = async (credentials) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + credentials.jwt
+    }
+  }
+
+  return await axios.get(`${url}/messages/${credentials.token.id}`, config);
+}
