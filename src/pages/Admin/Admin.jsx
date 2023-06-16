@@ -7,7 +7,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
-import { getUsersPaginate, deleteUser } from "../../services/apiCalls";
+import { getUsersPaginate, deleteUser, filterByUser } from "../../services/apiCalls";
 import { dateFormatMonth, getAge, truncate, useCapitals } from "../../services/functions";
 
 export const Admin = () => {
@@ -45,7 +45,7 @@ export const Admin = () => {
     })
     .catch((error) => console.error(error));
   }
-
+  
   const setPageFunction = (newPage) => {
     setPage(newPage);
     getUsersPaginate(newPage)
@@ -70,6 +70,27 @@ export const Admin = () => {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  useEffect(() => {
+    if (criteria !== "") {
+      const bringUsers = setTimeout(() => {
+        filterByUser(criteria)
+          .then((res) => {
+            setUsers(res.data.data);
+          })
+          .catch((error) => console.log(error));
+      }, 150);
+
+      return () => clearTimeout(bringUsers);
+    } else {
+        getUsersPaginate(page)
+        .then((res) => {
+          setUsers(res.data.data.data);
+          setPages(res.data.data.total_pages)
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [criteria]);
 
   return (
     <div className="adminDesign">

@@ -16,6 +16,10 @@ export const registerUser = async (credentials) => {
   return await axios.post(`${url}/users`, credentials);
 };
 
+export const filterByUser = async (filter) => {
+  return await axios.get(`${url}/users/filter?filter=${filter}`);
+};
+
 export const editUser = async (credentials, body) => {
   const config = {
     headers: {
