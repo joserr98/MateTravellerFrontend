@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const Header = () => {
 
+  const ROLE_ADMIN = 3;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rdxUserData = useSelector(userData);
@@ -49,6 +50,10 @@ export const Header = () => {
                 <Nav.Link onClick={() => navigate("/profile")}>
                       {rdxUserData.credentials.token.name}
                 </Nav.Link>
+                {rdxUserData.credentials.token.role_id == ROLE_ADMIN ? (
+                  <Nav.Link className="navbarLinks" onClick={() => navigate("/admin")}>Admin</Nav.Link>
+                ):(<> </>)
+                }
                 <Nav.Link className="navbarLinks" onClick={() => navigate("/trips")}>Trips</Nav.Link>
                 <Nav.Link className="navbarLinks" onClick={() => navigate("/user/trips")}>My Trips</Nav.Link>
                 <Nav.Link className="navbarLinks" onClick={() => logoutUserFunction()}>Logout</Nav.Link>
