@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./register.css";
+import "./Register.css";
 import Title from "../../assets/finallogo.png";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
