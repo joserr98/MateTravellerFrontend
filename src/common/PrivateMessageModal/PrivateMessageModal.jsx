@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './PrivateMessageModal.css'
 import { Button, Modal, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -16,6 +16,7 @@ export const PrivateMessageModal = ({
     recipient_id: selectedUser.user_id,
     description: '',
   })
+
   const inputHandlerFunction = (e) => {
     setMessageData((prevState) => ({
       ...prevState,
@@ -29,7 +30,6 @@ export const PrivateMessageModal = ({
     .catch((err)=> console.error(err))
   };
 
-  console.log(messageData)
   return (
     <Modal show={showModalUserData} onHide={handleCloseModalUserData}>
       <Modal.Header closeButton>
