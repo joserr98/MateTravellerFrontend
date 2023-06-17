@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8000/api";
-// const url = "https://mate-traveller-backend-final.vercel.app";
+const url = "https://mate-traveller-backend-final.vercel.app";
 
 // USERS ENDPOINTS
 export const loginUser = async (credentials) => {
