@@ -11,6 +11,7 @@ import {
 import { getAge, truncate, dateFormatMonth } from "../../services/functions";
 import { Button, Table } from "react-bootstrap";
 import { PrivateMessageModal } from "../../common/PrivateMessageModal/PrivateMessageModal";
+import { ErrorToast } from "../../common/ErrorToast/ErrorToast";
 
 export const Trip = () => {
   const rdxUserData = useSelector(userData);
@@ -19,6 +20,8 @@ export const Trip = () => {
   const [travelers, setTravelers] = useState([]);
   const [showModalUserData, setShowModalUserData] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [showToast, setShowToast] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     getOrganizerFromTrip(rdxTripData)
@@ -41,9 +44,11 @@ export const Trip = () => {
           .then((results) => {
             setTravelers(results.data.usersFromTrip);
           })
-          .catch((err) => console.error(err));
+          .catch((err) => {console.error(err)});
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setErrorMessage(err.response.data.message);
+        setShowToast(true);});
   };
 
   const handleOpenModalUserData = () => {
@@ -189,6 +194,12 @@ export const Trip = () => {
             </div>
           </div>
         </div>
+
+        <ErrorToast 
+        setShowToast={setShowToast} 
+        showToast={showToast}
+        errorMessage={errorMessage}
+      />
 
         {selectedUser && (
           <PrivateMessageModal

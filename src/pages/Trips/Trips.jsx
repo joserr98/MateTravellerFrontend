@@ -9,7 +9,10 @@ import {
   deleteTrip,
 } from "../../services/apiCalls";
 import Button from "react-bootstrap/Button";
-import { useCapitals, truncate, dateFormatMonth } from "../../services/functions";
+import {
+  useCapitals,
+  dateFormatMonth,
+} from "../../services/functions";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +32,6 @@ export const Trips = () => {
   const [showModalNewTrip, setShowModalNewTrip] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [tripId, setTripId] = useState("");
-
   const [newTripInfo, setNewTripInfo] = useState({
     city: "",
     start_date: "",
@@ -137,7 +139,9 @@ export const Trips = () => {
               <div className="trip" key={trip.id}>
                 <div className="tripsTitle">
                   <div className="tripsCity">{trip.city.toUpperCase()}</div>
-                  {!rdxUserData.credentials || !rdxUserData.credentials.token || rdxUserData.credentials.token.role_id !== 3 ? (
+                  {!rdxUserData.credentials ||
+                  !rdxUserData.credentials.token ||
+                  rdxUserData.credentials.token.role_id !== 3 ? (
                     <></>
                   ) : (
                     <div
@@ -152,12 +156,14 @@ export const Trips = () => {
                   )}
                 </div>
                 <div className="tripsDates">
-                  <div className="startDate">{dateFormatMonth(trip.start_date)}</div>
-                  <div className="endDate">{dateFormatMonth(trip.end_date)}</div>
+                  <div className="startDate">
+                    {dateFormatMonth(trip.start_date)}
+                  </div>
+                  <div className="endDate">
+                    {dateFormatMonth(trip.end_date)}
+                  </div>
                 </div>
-                <div className="tripsDescription">
-                  {trip.description}
-                </div>
+                <div className="tripsDescription">{trip.description}</div>
                 {userCredentials != 0 ? (
                   <div className="tripsButton">
                     <Button
