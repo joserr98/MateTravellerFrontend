@@ -8,12 +8,16 @@ import {
   getTravelersFromTrip,
   joinTrip,
 } from "../../services/apiCalls";
+import { IoChevronBackCircleOutline } from 'react-icons/io5';
 import { getAge, truncate, dateFormatMonth } from "../../services/functions";
 import { Button, Table } from "react-bootstrap";
 import { PrivateMessageModal } from "../../common/PrivateMessageModal/PrivateMessageModal";
 import { ErrorToast } from "../../common/ErrorToast/ErrorToast";
+import { useNavigate } from "react-router-dom";
 
 export const Trip = () => {
+
+  const navigate = useNavigate();
   const rdxUserData = useSelector(userData);
   const rdxTripData = useSelector(detailData);
   const [organizer, setOrganizer] = useState({});
@@ -76,7 +80,10 @@ export const Trip = () => {
     <div className="tripDeisgn">
       <div className="tripContainer">
         <div className="tripCard">
-          <div className="tripCardTitle">{rdxTripData.data.city}</div>
+          <div className="tripCardTitle">
+            <div className="back"><IoChevronBackCircleOutline className="clickable" onClick={() => navigate('/trips')}/></div>
+            <div className="titleTrip">{rdxTripData.data.city}</div>
+          </div>
           <div className="tripCardInfo">
             <div className="tripDetails">
               <div className="tripDate">
