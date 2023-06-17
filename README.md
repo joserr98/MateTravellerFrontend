@@ -52,6 +52,7 @@ Here are the credentials in case you want to test it as admin:
 #### TRIPS
 Here you can see all trips available. As we are not logged in we cannot see the detailed information such as other people joined.
 <img src="./src/assets/trips.png"/>
+<img src="./src/assets/tripsmobile.png"/>
 
 
 #### MY TRIPS
@@ -62,12 +63,19 @@ Now, you can see that we are logged in and we are on "My Trips" tab. You can see
 #### TRIP DETAILS
 Here you can see the trip detail and the people who has joined the trip
 <img src="./src/assets/trip.png"/>
+<img src="./src/assets/tripmobile.png"/>
+
 
 
 #### ADMIN BOARD
 This is the admin board, he can search by anything to filter
 users and also delete this users.
 <img src="./src/assets/adminboard.png"/>
+
+
+#### PROFILE
+You have your prefile and you can delete your account or edit/add information.
+<img src="./src/assets/profilemobile.png"/>
 
 
 #### MESSAGES
