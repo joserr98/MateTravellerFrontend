@@ -5,11 +5,13 @@ import Title from "../../assets/finallogo.png";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { registerUser } from "../../services/apiCalls";
+import { ErrorToast } from "../../common/ErrorToast/ErrorToast";
 
 export const Register = () => {
 
   const navigate = useNavigate();
-
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [showToast, setShowToast] = useState(false);
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -18,10 +20,12 @@ export const Register = () => {
 
   const registerUserFunction = () => {
     registerUser(credentials)
-    .then((result) => {
+    .then(() => {
       navigate("/login");
     })
-    .catch((error) => console.error(error));
+    .catch((err) => {
+      setErrorMessage(err.response.data.message);
+      setShowToast(true);});
   }
 
   const inputHandlerFunction = (e) => {
@@ -56,6 +60,11 @@ export const Register = () => {
         </Button>
       </div>
     </Form>
+    <ErrorToast
+          setShowToast={setShowToast} 
+          showToast={showToast}
+          errorMessage={errorMessage}
+        />
     </div>
   );
 };
