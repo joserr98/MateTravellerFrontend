@@ -78,7 +78,7 @@ export const Admin = () => {
           .then((res) => {
             setUsers(res.data.data);
           })
-          .catch((error) => console.log(error));
+          .catch((error) => console.error(error));
       }, 150);
 
       return () => clearTimeout(bringUsers);

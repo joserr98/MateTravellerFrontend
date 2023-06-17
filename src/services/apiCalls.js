@@ -40,7 +40,7 @@ export const deleteUser = async (credentials, userId) => {
       Authorization: "Bearer " + credentials.jwt,
     },
   };
-  console.log(userId)
+  
   return await axios.delete(`${url}/users/${userId}`, config);
 };
 
@@ -109,4 +109,14 @@ export const getMessages = async (credentials) => {
   }
 
   return await axios.get(`${url}/messages/${credentials.token.id}`, config);
+}
+
+export const sendMessage = async (credentials, body) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + credentials.jwt
+    }
+  }
+  console.log(body)
+  return await axios.post(`${url}/messages`, body, config);
 }

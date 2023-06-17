@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import './PrivateMessageModal.css'
 import { Button, Modal, Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { userData } from "../../pages/userSlice";
+import { sendMessage } from "../../services/apiCalls";
 
 export const PrivateMessageModal = ({
   showModalUserData,
@@ -8,19 +11,25 @@ export const PrivateMessageModal = ({
   selectedUser
 }) => {
 
+  const rdxUserData = useSelector(userData)
+  const [messageData, setMessageData] = useState({
+    recipient_id: selectedUser.user_id,
+    description: '',
+  })
   const inputHandlerFunction = (e) => {
-    setEditedData((prevState) => ({
+    setMessageData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
   const sendMessageFunction = () => {
-    sendMessage()
-    .then((e) => e)
+    sendMessage(rdxUserData.credentials,messageData)
+    .then(() => handleCloseModalUserData())
     .catch((err)=> console.error(err))
   };
 
+  console.log(messageData)
   return (
     <Modal show={showModalUserData} onHide={handleCloseModalUserData}>
       <Modal.Header closeButton>
@@ -35,7 +44,7 @@ export const PrivateMessageModal = ({
               type="text"
               as={"textarea"}
               placeholder={"write here your message..."}
-              name={"message"}
+              name={"description"}
               rows={5}
               onChange={(e) => inputHandlerFunction(e)}
               autoFocus
