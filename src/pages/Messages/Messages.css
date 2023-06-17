@@ -11,7 +11,7 @@
 .messagesContainer {
     width: 90%;
     margin-top: 7em;
-    height: 70vh;
+    height: 65vh;
     border: 3px solid white;
     background-color: #1982c4;
     display: flex;
@@ -23,8 +23,12 @@
     background: #072d45;
 }
 
-.owner{
+.sender{
     color: #ff9d00;
+}
+
+.receiver{
+    color: #FFCF00;
 }
 
 .messages{

@@ -23,10 +23,10 @@ export const Messages = () => {
         {messages.map((message) => (
   <div className={`messages ${rdxUserData.credentials.token.id == message.sender_id ? 'darkBlue' : ''}`} key={message.id}>
             <div className="messageUsers">
-              <div className={`messageSender ${rdxUserData.credentials.token.id == message.sender_id ? 'owner' : ''}`}>
+              <div className={`messageSender ${rdxUserData.credentials.token.id == message.sender_id ? 'sender' : ''}`}>
                 From: {message.sender_name}
               </div> 
-              <div className={`messageRecipient ${rdxUserData.credentials.token.id == message.recipient_id ? 'owner' : ''}`}>
+              <div className={`messageRecipient ${rdxUserData.credentials.token.id == message.recipient_id ? 'receiver' : ''}`}>
                 To: {message.recipient_name}
               </div>
             </div>
