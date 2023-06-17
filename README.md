@@ -36,40 +36,40 @@ Here are the credentials in case you want to test it as admin:
 
 ##### Otherwise you can <a href="https://mate-traveller-frontend.vercel.app/register">register</a> here.
 
-<br>
+
 #### INDEX
 <img src="./src/assets/home.png"/>
 
-<br>
+
 #### REGISTER
 <img src="./src/assets/register.png"/>
 
-<br>
+
 #### LOGIN
 <img src="./src/assets/login.png"/>
 
-<br>
+
 #### TRIPS
 Here you can see all trips available. As we are not logged in we cannot see the detailed information such as other people joined.
 <img src="./src/assets/trips.png"/>
 
-<br>
+
 #### MY TRIPS
 Now, you can see that we are logged in and we are on "My Trips" tab. You can see how this user has no trips.
 <img src="./src/assets/mytrips.png"/>
 
-<br>
+
 #### TRIP DETAILS
 Here you can see the trip detail and the people who has joined the trip
 <img src="./src/assets/trip.png"/>
 
-<br>
+
 #### ADMIN BOARD
 This is the admin board, he can search by anything to filter
 users and also delete this users.
 <img src="./src/assets/adminboard.png"/>
 
-<br>
+
 #### MESSAGES
 Here you can see your latest messages. You can difference the sent ones from the recieved ones.
 <img src="./src/assets/messages.png"/>
