@@ -18,7 +18,7 @@ export const Trip = () => {
   const [organizer, setOrganizer] = useState({});
   const [travelers, setTravelers] = useState([]);
   const [showModalUserData, setShowModalUserData] = useState(false);
-  const [selectedUser, setSelectedUser] = useState({});
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     getOrganizerFromTrip(rdxTripData)
@@ -150,13 +150,21 @@ export const Trip = () => {
                                   setSelectedUser(traveler);
                                 }}
                               >
-                                {truncate(traveler.name, 20)},{" "}
-                                {getAge(traveler.birthday)}{" "}
+                                {traveler.name ? traveler.name : <></>}
+                                {traveler.birthday ? (
+                                  `,` + getAge(traveler.birthday)
+                                ) : (
+                                  <></>
+                                )}{" "}
                               </a>
                             ) : (
                               <>
-                                {truncate(traveler.name, 20)},{" "}
-                                {getAge(traveler.birthday)}{" "}
+                                {traveler.name ? traveler.name : <></>}
+                                {traveler.birthday ? (
+                                  `,` + getAge(traveler.birthday)
+                                ) : (
+                                  <></>
+                                )}{" "}
                               </>
                             )}
                           </div>
@@ -166,7 +174,11 @@ export const Trip = () => {
                             className="tripTravelerCountry"
                             title={traveler.country}
                           >
-                            {truncate(traveler.country, 14)}
+                            {traveler.country ? (
+                              truncate(traveler.country, 14)
+                            ) : (
+                              <></>
+                            )}
                           </div>
                         </td>
                       </tr>
@@ -178,11 +190,13 @@ export const Trip = () => {
           </div>
         </div>
 
-        <PrivateMessageModal
-          showModalUserData={showModalUserData}
-          handleCloseModalUserData={handleCloseModalUserData}
-          selectedUser={selectedUser}
-        />
+        {selectedUser && (
+          <PrivateMessageModal
+            showModalUserData={showModalUserData}
+            handleCloseModalUserData={handleCloseModalUserData}
+            selectedUser={selectedUser}
+          />
+        )}
       </div>
     </div>
   );
