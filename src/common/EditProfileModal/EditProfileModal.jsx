@@ -14,6 +14,7 @@ export const EditProfileModal = ({
   }) => {
   
   const rdxUserData = useSelector(userData);
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <Modal show={showModalProfileEdit} onHide={handleCloseModalEdit}>
@@ -78,6 +79,7 @@ export const EditProfileModal = ({
               type="date"
               placeholder={rdxUserData.credentials.token.birthday}
               name={"birthday"}
+              max={today}
               onChange={(e) => inputHandlerFunction(e)}
             />
           </Form.Group>
