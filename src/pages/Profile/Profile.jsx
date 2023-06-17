@@ -71,7 +71,7 @@ export const Profile = () => {
   };
 
   const deleteProfileFunction = () => {
-    deleteUser(rdxUserData.credentials)
+    deleteUser(rdxUserData.credentials,rdxUserData.credentials.token.id)
       .then(() => {
         handleCloseConfirmationModal();
         dispatch(logout({ credentials: {} }));
