@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import './PrivateMessageModal.css'
+import "./PrivateMessageModal.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { userData } from "../../pages/userSlice";
 import { sendMessage } from "../../services/apiCalls";
+import { ErrorToast } from "../ErrorToast/ErrorToast";
 
 export const PrivateMessageModal = ({
   showModalUserData,
   handleCloseModalUserData,
-  selectedUser
+  selectedUser,
 }) => {
-
-  const rdxUserData = useSelector(userData)
+  const [showToast, setShowToast] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const rdxUserData = useSelector(userData);
   const [messageData, setMessageData] = useState({
     recipient_id: selectedUser.user_id,
-    description: '',
-  })
+    description: "",
+  });
 
   const inputHandlerFunction = (e) => {
     setMessageData((prevState) => ({
@@ -25,9 +27,12 @@ export const PrivateMessageModal = ({
   };
 
   const sendMessageFunction = () => {
-    sendMessage(rdxUserData.credentials,messageData)
-    .then(() => handleCloseModalUserData())
-    .catch((err)=> console.error(err))
+    sendMessage(rdxUserData.credentials, messageData)
+      .then(() => handleCloseModalUserData())
+      .catch((err) => {
+        setErrorMessage(err.response.data.message);
+        setShowToast(true);
+      });
   };
 
   return (
@@ -60,6 +65,11 @@ export const PrivateMessageModal = ({
           Send Message
         </Button>
       </Modal.Footer>
+      <ErrorToast
+        setShowToast={setShowToast}
+        showToast={showToast}
+        errorMessage={errorMessage}
+      />
     </Modal>
   );
 };
