@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import {
-  getPaginateTrips,
   getUserTrips,
   deleteTrip,
 } from "../../services/apiCalls";
@@ -15,8 +14,6 @@ import { detail } from "../detailSlice";
 
 export const UserTrips = () => {
   const [trips, setTrips] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pages, setPages] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [tripId, setTripId] = useState("");
   const handleCloseConfirmationModal = () => {
@@ -30,9 +27,6 @@ export const UserTrips = () => {
   useEffect(() => {
     getUserTrips(rdxUserData.credentials)
       .then((results) => {
-          const currentPages = results.data.userTrips.length;
-          const totalPages = Math.ceil(currentPages / 9);
-          setPages(totalPages);
           setTrips(results.data.userTrips);
         })
         .catch((err) => console.error(err));
@@ -49,20 +43,15 @@ export const UserTrips = () => {
         setShowConfirmationModal(false);
         getUserTrips(rdxUserData.credentials)
           .then((results) => {
-            const currentPages = results.data.data.length;
-            const totalPages = Math.ceil(currentPages / 9);
-            setPages(totalPages);
-          })
-          .catch((err) => console.error(err));
-        getPaginateTrips(page)
-          .then((results) => {
-            setTrips(results.data.data.data);
+
+            setTrips(results.data.userTrips);
           })
           .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
   };
 
+  
   return (
     <div className="userTripsDesign">
       <div className="tripsContainer">
@@ -104,9 +93,7 @@ export const UserTrips = () => {
               </div>
             ))}
           </div>
-        ) : (
-          <></>
-        )}
+        ) : (<div>You dont have any trip yet!</div>) }
       </div>
       <ConfirmationModal
         showConfirmationModal={showConfirmationModal}
