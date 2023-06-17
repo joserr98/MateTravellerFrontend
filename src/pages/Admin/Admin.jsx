@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { getUsersPaginate, deleteUser, filterByUser } from "../../services/apiCalls";
-import { dateFormatMonth, getAge, truncate, useCapitals } from "../../services/functions";
+import { dateFormatMonth, truncate, useCapitals } from "../../services/functions";
 
 export const Admin = () => {
   const ADMIN_ROLE = 3;
@@ -142,9 +142,10 @@ export const Admin = () => {
                   <td title={user.email}>
                     {truncate(useCapitals(user.email, "first"), 20)}
                   </td>
-                  <td title={user.birthday}>{dateFormatMonth(user.birthday)}</td>
-                  <td title={user.country}>
-                    {truncate(useCapitals(user.country, "first"), 10)}
+                  <td title={user.birthday ? dateFormatMonth(user.birthday) :(<></>)}>
+                    {user.birthday ? dateFormatMonth(user.birthday) :(<></>)}</td>
+                  <td title={user.country ? dateFormatMonth(user.country) :(<></>)}>
+                    {user.country ? truncate(useCapitals(user.country, "first"), 10) : (<></>)}
                   </td>
                   <td className="adminButtons">
                     <div>
