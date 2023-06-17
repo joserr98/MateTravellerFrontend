@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Button, Modal, Form } from "react-bootstrap";
-import Toast from "react-bootstrap/Toast";
 import { userData } from "../../pages/userSlice";
+import { ErrorToast } from "../ErrorToast/ErrorToast";
 
 export const EditProfileModal = ({
     showModalProfileEdit,
@@ -11,6 +11,7 @@ export const EditProfileModal = ({
     editProfileFunction,
     showToast,
     setShowToast,
+    errorMessage
   }) => {
   
   const rdxUserData = useSelector(userData);
@@ -95,23 +96,11 @@ export const EditProfileModal = ({
         </Button>
       </Modal.Footer>
 
-      <div className="toast-container">
-        <Toast
-          bg={"danger"}
-          show={showToast}
-          delay={1350}
-          autohide
-          className="toasted"
-          style={{
-            position: "fixed",
-            zIndex: 999,
-            top: 0,
-          }}
-          onClose={() => setShowToast(false)}
-        >
-          <Toast.Body>Please, make sure you enter your password.</Toast.Body>
-        </Toast>
-      </div>
+      <ErrorToast
+      showToast={showToast}
+      setShowToast={setShowToast}
+      errorMessage={errorMessage}
+      />
     </Modal>
   );
 };

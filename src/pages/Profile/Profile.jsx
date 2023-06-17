@@ -22,7 +22,7 @@ export const Profile = () => {
 
   const [showModalProfileEdit, setShowModalProfileEdit] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState(null);
   const [editedData, setEditedData] = useState({
     id: rdxUserData.credentials.token.id,
     name: rdxUserData.credentials.token.name,
@@ -55,9 +55,7 @@ export const Profile = () => {
   };
 
   const editProfileFunction = () => {
-    if (!editedData.password) {
-      setShowToast(true);
-    }
+
     editUser(rdxUserData.credentials, editedData)
       .then(() => {
         const data = {
@@ -67,7 +65,9 @@ export const Profile = () => {
         dispatch(login({ credentials: data }));
         setShowModalProfileEdit(false);
       })
-      .catch((error) => console.error(error));
+      .catch((err) => {
+      setErrorMessage(err.response.data.message);
+      setShowToast(true)});
   };
 
   const deleteProfileFunction = () => {
@@ -164,6 +164,7 @@ export const Profile = () => {
         editProfileFunction={editProfileFunction}
         setShowToast={setShowToast}
         showToast={showToast}
+        errorMessage={errorMessage}
       />
 
       <ConfirmationModal
