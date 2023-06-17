@@ -117,6 +117,6 @@ export const sendMessage = async (credentials, body) => {
       Authorization: "Bearer " + credentials.jwt
     }
   }
-  console.log(body)
+
   return await axios.post(`${url}/messages`, body, config);
 }
