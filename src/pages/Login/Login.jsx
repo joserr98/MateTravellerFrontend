@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, userData } from "../userSlice";
 import { loginUser } from "../../services/apiCalls";
+import { ErrorToast } from "../../common/ErrorToast/ErrorToast";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const rdxUserData = useSelector(userData);
-
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [showToast, setShowToast] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -38,7 +40,9 @@ export const Login = () => {
         navigate("/");
       })
 
-      .catch((error) => console.error(error));
+      .catch((err) => {
+        setErrorMessage(err.response.data.message);
+        setShowToast(true);});
   };
 
   useEffect(() => {
@@ -79,6 +83,12 @@ export const Login = () => {
           </div>
         </Form>
       </div>
+      <ErrorToast
+          setShowToast={setShowToast} 
+          showToast={showToast}
+          errorMessage={errorMessage}
+        />
     </div>
+
   );
 };
