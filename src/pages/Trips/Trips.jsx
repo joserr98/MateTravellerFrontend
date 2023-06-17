@@ -137,7 +137,7 @@ export const Trips = () => {
               <div className="trip" key={trip.id}>
                 <div className="tripsTitle">
                   <div className="tripsCity">{trip.city.toUpperCase()}</div>
-                  {!rdxUserData.credentials || !rdxUserData.credentials.token || rdxUserData.credentials.token.role_id === 1 ? (
+                  {!rdxUserData.credentials || !rdxUserData.credentials.token || rdxUserData.credentials.token.role_id !== 3 ? (
                     <></>
                   ) : (
                     <div
