@@ -1,4 +1,4 @@
-# Mate Traveler FrontEnd - JavaScript, React
+# Mate Traveler FrontEnd - JavaScript | React | HTML5 | CSS3 | Bootstrap
 
 <img src="./src/assets/gkhbs.png"/>
 
@@ -21,6 +21,11 @@ As an organizer, you have the same abilities as a traveler, but you also have th
 The admin role has all permissions and additionally has the ability to delete user accounts.
 
 Please let me know if you need any further assistance or if you have any specific questions!
+
+Find me on:
+ <a href="https://www.linkedin.com/in/jos%C3%A9-manuel-ruiz-ruiz-07b262182/">LinkedIn</a>
+ <a href="https://github.com/joserr98/">GitHub</a>
+<br>
 
 ##### You can check the <a href="https://mate-traveller-frontend.vercel.app">web</a> "https://mate-traveller-frontend.vercel.app"
 
@@ -82,7 +87,8 @@ You have your prefile and you can delete your account or edit/add information.
 Here you can see your latest messages. You can difference the sent ones from the recieved ones.
 <img src="./src/assets/messages.png"/>
 
-Thanks for reding, you can reach me by these socials:
-<img src="./src/assets/github.png" width="100" href="https://github.com/joserr98/"/>
-<img src="./src/assets/linkedin.png" width="80" href="https://www.linkedin.com/in/jos%C3%A9-manuel-ruiz-ruiz-07b262182/"/>
+###### Thanks for reding, you can reach me by these socials:
+<img src="./src/assets/github.png" width="80" href="https://github.com/joserr98/"/>
+
+&nbsp;&nbsp;&nbsp;<img src="./src/assets/linkedin.png" width="60" href="https://www.linkedin.com/in/jos%C3%A9-manuel-ruiz-ruiz-07b262182/"/>
 
