@@ -31,8 +31,8 @@ export const Profile = () => {
     country: rdxUserData.credentials.token.country,
     birthday: rdxUserData.credentials.token.birthday,
     password: "",
+    role_id: rdxUserData.credentials.token.role_id
   });
-
   const handleCloseConfirmationModal = () => {
     setShowConfirmationModal(false);
   };
